@@ -194,6 +194,10 @@ function ProjectCard({
 
 export default function FeaturedProjects() {
   const projects: Project[] = [
+
+
+
+    
     {
       number: '',
       title: 'FreshCart – Modern E-Commerce',
