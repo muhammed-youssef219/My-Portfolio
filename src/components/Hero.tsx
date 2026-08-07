@@ -214,7 +214,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
               >
-                <img src="/me.jpeg" alt="Mohamed Youssif" className="h-full w-full object-cover" />
+                <img src="/me.jpeg" alt="Muhammed Youssef" className="h-full w-full object-cover" />
               </motion.div>
             </motion.div>
           </div>
