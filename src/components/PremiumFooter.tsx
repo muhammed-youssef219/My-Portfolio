@@ -67,7 +67,7 @@ const UnderlineLink = ({
 
 export default function PremiumFooter() {
   return (
-    <footer className="bg-[#050816]">
+    <footer id="footer" className="bg-[#050816]">
       <div className="mx-auto w-full max-w-6xl px-6 pt-16 pb-10">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-end">
           {/* Left */}

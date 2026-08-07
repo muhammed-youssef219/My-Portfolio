@@ -1,29 +1,37 @@
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 
-import { Menu, X } from 'lucide-react'
+import { AnimatePresence, motion } from 'framer-motion'
+import {
+  Download,
+  Menu,
+  X,
+  User,
+  FolderKanban,
+  Sparkles,
+  MessageCircle,
+  Layers,
+} from 'lucide-react'
+import type { LucideIcon } from 'lucide-react'
 
-type SectionId = 'about' | 'projects' | 'skills' | 'contact'
+type SectionId = 'about' | 'projects' | 'skills' | 'contact' | 'footer'
 
 type NavItem = {
   id: SectionId
   label: string
+  icon: LucideIcon
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'contact', label: 'Contact' },
+  { id: 'about', label: 'About', icon: User },
+  { id: 'projects', label: 'Projects', icon: FolderKanban },
+  { id: 'skills', label: 'Skills', icon: Sparkles },
+  { id: 'contact', label: 'Contact', icon: MessageCircle },
+  { id: 'footer', label: 'Footer', icon: Layers },
 ]
 
-const TOP_PX = 24
-const LOGO_PX = 52
-const CAPSULE_HEIGHT_PX = 60
-const LEFT_RIGHT_PADDING_PX = 24
-const LINK_GAP_PX = 40
-
-// Offset chosen to keep the section title/content visible under the fixed navbar.
-const SCROLL_OFFSET_PX = TOP_PX + CAPSULE_HEIGHT_PX + 12
+const BAR_HEIGHT_PX = 84
+const SCROLL_OFFSET_PX = BAR_HEIGHT_PX + 16
 
 function scrollToSection(id: SectionId) {
   const el = document.getElementById(id)
@@ -36,9 +44,6 @@ function scrollToSection(id: SectionId) {
 function useActiveSection(sectionIds: SectionId[]) {
   const [activeId, setActiveId] = useState<SectionId | null>(null)
 
-  // Ensure: no nav item is active on initial load until scroll spy updates.
-  // (We only ever set this state from the IntersectionObserver.)
-
   useEffect(() => {
     const elements = sectionIds
       .map((id) => document.getElementById(id))
@@ -48,7 +53,6 @@ function useActiveSection(sectionIds: SectionId[]) {
 
     const observer = new IntersectionObserver(
       (entries) => {
-        // Pick the most visible intersecting section.
         const visible = entries
           .filter((e) => e.isIntersecting)
           .sort((a, b) => (b.intersectionRatio ?? 0) - (a.intersectionRatio ?? 0))
@@ -60,7 +64,6 @@ function useActiveSection(sectionIds: SectionId[]) {
       },
       {
         root: null,
-        // Keep it subtle: activate when the section is around the top third.
         rootMargin: '-20% 0px -65% 0px',
         threshold: [0.05, 0.1, 0.2, 0.35, 0.5, 0.75],
       },
@@ -74,191 +77,201 @@ function useActiveSection(sectionIds: SectionId[]) {
   return activeId
 }
 
-function DesktopNav({ activeId, onSelect }: { activeId: SectionId | null; onSelect: (id: SectionId) => void }): React.JSX.Element {
+function useScrolled(threshold = 8) {
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    let rafId: number | null = null
+
+    const onScroll = () => {
+      if (rafId != null) return
+      rafId = window.requestAnimationFrame(() => {
+        rafId = null
+        setScrolled((window.scrollY || 0) > threshold)
+      })
+    }
+
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => {
+      if (rafId != null) window.cancelAnimationFrame(rafId)
+      window.removeEventListener('scroll', onScroll)
+    }
+  }, [threshold])
+
+  return scrolled
+}
+
+function Logo() {
   return (
-    <div
-      className="relative hidden md:flex items-center"
-
-      style={{ height: CAPSULE_HEIGHT_PX }}
-      aria-label="Primary navigation"
+    <span
+      className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
+      style={{
+        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+        border: '1px solid rgba(255,255,255,.08)',
+      }}
     >
-      <div
-        className="flex h-[60px] items-center justify-between gap-0 rounded-full border"
-        style={{
-          background: 'rgba(15,23,42,.65)',
-          borderColor: 'rgba(255,255,255,.08)',
-          paddingLeft: LEFT_RIGHT_PADDING_PX,
-          paddingRight: LEFT_RIGHT_PADDING_PX,
-          height: CAPSULE_HEIGHT_PX,
-        }}
-      >
-        <ul className="flex items-center" style={{ gap: LINK_GAP_PX }} role="list">
-          {NAV_ITEMS.map((item) => {
-            const isActive = item.id === activeId
-            return (
-              <li key={item.id}>
-                <button
-                  type="button"
-                  onClick={() => onSelect(item.id)}
-                  className="relative inline-flex items-center justify-center rounded-full px-2 text-sm font-semibold"
-                  style={{ color: '#FFFFFF' }}
-                  aria-current={isActive ? 'page' : undefined}
-                >
-                  {/* Hover/active rounded background behind the text */}
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 -z-10 rounded-full opacity-0 transition-opacity duration-200"
-                    style={{
-                      background: 'rgba(139,92,246,.17)',
-                      boxShadow: '0 0 18px rgba(139,92,246,0.18)',
-                    }}
-                  />
+      <span className="text-base font-bold tracking-[-0.4px] text-white">M</span>
+    </span>
+  )
+}
 
-                    <span
-                      aria-hidden
-                      className="pointer-events-none absolute inset-0 -z-10 rounded-full transition-opacity duration-200"
-                      style={{
-                        background: 'rgba(139,92,246,.20)',
-                        opacity: isActive ? 1 : 0,
-                      }}
-                    />
-
-                  <span className="relative z-10">
-                    {item.label}
-                  </span>
-
-                  {/* White hover background (requested) */}
-                  <span
-                    aria-hidden
-                    className="pointer-events-none absolute inset-0 -z-10 rounded-full opacity-0 transition-opacity duration-200"
-                    style={{
-                      background: 'rgba(255,255,255,0.08)',
-                    }}
-                  />
-
-                  {/* Set hover opacity via CSS below */}
-                </button>
-              </li>
-            )
-          })}
-        </ul>
-
-        {/* spacer to keep proportions similar; capsule is already flex */}
-        <div aria-hidden className="w-0" />
-      </div>
-
-      {/* Hover state: use CSS to turn on the first background span on hover */}
-      <style>
-        {`
-          /* Only affect buttons inside the capsule */
-          .relative.hidden.items-center ul li button:hover > span[aria-hidden]:nth-child(1) {
-            opacity: 1;
-          }
-          .relative.hidden.items-center ul li button:hover > span[aria-hidden]:nth-child(2) {
-            opacity: 1;
-          }
-        `}
-      </style>
-    </div>
+function DesktopLinks({ activeId, onSelect }: { activeId: SectionId | null; onSelect: (id: SectionId) => void }) {
+  return (
+    <ul className="hidden items-center gap-8 md:flex" role="list" aria-label="Primary navigation">
+      {NAV_ITEMS.map((item) => {
+        const isActive = item.id === activeId
+        return (
+          <li key={item.id}>
+            <button
+              type="button"
+              onClick={() => onSelect(item.id)}
+              className={`text-sm font-semibold transition hover:text-white ${
+                isActive ? 'text-white' : 'text-white/70'
+              }`}
+              aria-current={isActive ? 'page' : undefined}
+            >
+              {item.label}
+            </button>
+          </li>
+        )
+      })}
+    </ul>
   )
 }
 
 function MobileMenu({
-  // activeId is controlled by scroll spy; it should be able to be null initially.
-  // Mobile menu does not rely on an active value for visibility—only for the subtle highlight.
-
   activeId,
   mobileOpen,
-  onToggle,
+  onOpen,
+  onClose,
   onSelect,
 }: {
   activeId: SectionId | null
   mobileOpen: boolean
-  onToggle: () => void
+  onOpen: () => void
+  onClose: () => void
   onSelect: (id: SectionId) => void
 }) {
+  useEffect(() => {
+    if (!mobileOpen) return
+    const previousOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.body.style.overflow = previousOverflow
+    }
+  }, [mobileOpen])
+
   return (
-    <div className="relative md:hidden">
+    <div className="md:hidden">
       <button
         type="button"
-        onClick={onToggle}
-        aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+        onClick={onOpen}
+        aria-label="Open menu"
         aria-expanded={mobileOpen}
-        className="inline-flex h-[52px] w-[52px] items-center justify-center rounded-full border"
-        style={{
-          background: 'rgba(15,23,42,.65)',
-          borderColor: 'rgba(255,255,255,.08)',
-          color: '#FFFFFF',
-        }}
+        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white"
       >
-        {mobileOpen ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
+        <Menu className="h-4 w-4" />
       </button>
 
-      {mobileOpen ? (
-        <div
-          className="absolute right-0 mt-3 w-[min(300px,86vw)] overflow-hidden rounded-3xl border backdrop-blur"
-          style={{
-            background: 'rgba(15,23,42,.75)',
-            borderColor: 'rgba(255,255,255,.08)',
-            boxShadow: '0 24px 60px rgba(0,0,0,0.55)',
-            transformOrigin: 'top right',
-            animation: 'mobileMenuSlideIn 280ms easeOut',
-          }}
-          role="dialog"
-          aria-label="Mobile navigation"
-        >
-          <style>{`
-            @keyframes mobileMenuSlideIn {
-              from { opacity: 0; transform: translateY(-6px) scale(0.98); }
-              to { opacity: 1; transform: translateY(0) scale(1); }
-            }
-          `}</style>
-          <ul className="flex flex-col gap-[18px] px-6 pb-6 pt-6">
+      {createPortal(
+        <AnimatePresence>
+          {mobileOpen ? (
+            <>
+              <motion.button
+                type="button"
+                aria-label="Close menu"
+                onClick={onClose}
+                className="fixed inset-0 z-40 bg-[#020308]/70 backdrop-blur-sm"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.25 }}
+              />
 
-            {NAV_ITEMS.map((item) => {
-              const isActive = item.id === activeId
-              return (
-                <li key={item.id}>
+              <motion.div
+                className="fixed inset-y-0 right-0 z-50 flex w-[84vw] max-w-[340px] flex-col border-l border-white/10"
+                style={{
+                  background: 'linear-gradient(180deg, #0b1020 0%, #050816 100%)',
+                  boxShadow: '-24px 0 60px rgba(0,0,0,.55)',
+                }}
+                role="dialog"
+                aria-modal="true"
+                aria-label="Mobile navigation"
+                initial={{ x: '100%' }}
+                animate={{ x: 0 }}
+                exit={{ x: '100%' }}
+                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+              >
+                <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
+                  <div className="flex items-center gap-3">
+                    <Logo />
+                    <span className="flex flex-col">
+                      <span className="text-sm font-bold leading-tight text-white">Muhammed Youssef</span>
+                      <span className="text-xs leading-tight text-white/55">Frontend Developer</span>
+                    </span>
+                  </div>
                   <button
                     type="button"
-                    onClick={() => onSelect(item.id)}
-                    className="relative flex w-full items-center justify-start gap-0 rounded-[14px] border border-white/0 px-4 py-[18px] text-[18px] font-[600]"
-                    style={{
-                      color: '#FFFFFF',
-                      letterSpacing: 'normal',
-                      transition: '200ms ease',
-                    }}
-                    aria-current={isActive ? 'page' : undefined}
+                    onClick={onClose}
+                    aria-label="Close menu"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white"
                   >
-                    <span
-                      aria-hidden
-                      className="pointer-events-none absolute inset-0 rounded-[14px] opacity-0 transition-opacity duration-200"
-                      style={{
-                        background: 'rgba(139,92,246,0.16)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        boxSizing: 'border-box',
-                        transition: 'opacity 200ms ease',
-                      }}
-                    />
-                    <span
-                      aria-hidden
-                      className="pointer-events-none absolute inset-0 rounded-full transition-opacity duration-200"
-                      style={{
-                        background: 'rgba(139,92,246,.20)',
-                        opacity: isActive ? 1 : 0,
-                      }}
-                    />
-                    <span className="relative z-10">{item.label}</span>
-                    <style>{`
-                      button:hover > span[aria-hidden] { opacity: 1; }
-                    `}</style>
+                    <X className="h-4 w-4" />
                   </button>
-                </li>
-              )
-            })}
-          </ul>
-        </div>
-      ) : null}
+                </div>
+
+                <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
+                  {NAV_ITEMS.map((item, i) => {
+                    const isActive = item.id === activeId
+                    const Icon = item.icon
+                    return (
+                      <motion.button
+                        key={item.id}
+                        type="button"
+                        onClick={() => onSelect(item.id)}
+                        className={`flex w-full items-center gap-3.5 rounded-xl px-4 py-3.5 text-left text-[15px] font-semibold transition ${
+                          isActive
+                            ? 'bg-white/[0.08] text-white ring-1 ring-white/10'
+                            : 'text-white/70 hover:bg-white/5 hover:text-white'
+                        }`}
+                        aria-current={isActive ? 'page' : undefined}
+                        initial={{ opacity: 0, x: 16 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, delay: 0.08 + i * 0.04, ease: 'easeOut' }}
+                      >
+                        <span
+                          className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
+                            isActive
+                              ? 'bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white'
+                              : 'bg-white/5 text-white/60'
+                          }`}
+                        >
+                          <Icon className="h-4 w-4" />
+                        </span>
+                        {item.label}
+                      </motion.button>
+                    )
+                  })}
+                </nav>
+
+                <div className="border-t border-white/10 p-4">
+                  <a
+                    href="/Cv.pdf"
+                    download
+                    className="flex items-center justify-center gap-2 rounded-xl px-4 py-3.5 text-sm font-semibold text-white shadow-[0_15px_40px_-10px_rgba(139,92,246,.55)]"
+                    style={{ background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)' }}
+                  >
+                    <Download className="h-4 w-4" />
+                    Download CV
+                  </a>
+                </div>
+              </motion.div>
+            </>
+          ) : null}
+        </AnimatePresence>,
+        document.body,
+      )}
     </div>
   )
 }
@@ -267,44 +280,7 @@ export default function Navbar() {
   const navItems = useMemo(() => NAV_ITEMS, [])
   const activeId = useActiveSection(navItems.map((n) => n.id))
   const [mobileOpen, setMobileOpen] = useState(false)
-
-  // Visibility behavior:
-  // - visible on initial load
-  // - hides immediately once user scrolls down a bit
-  // - stays hidden while scrolling (even upward)
-  // - shows again only when returning to the very top
-  const [isHidden, setIsHidden] = useState(false)
-
-  useEffect(() => {
-    let rafId: number | null = null
-
-    const onScroll = () => {
-      if (rafId != null) return
-
-      rafId = window.requestAnimationFrame(() => {
-        rafId = null
-        const y = window.scrollY || 0
-
-        // "Very top" threshold: within first few pixels.
-        if (y <= TOP_PX) {
-          setIsHidden(false)
-          return
-        }
-
-        // Scrolled down: hide (once hidden, we never show again until the top condition above).
-        setIsHidden(true)
-      })
-    }
-
-    // Run once in case the page loads scrolled.
-    onScroll()
-
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => {
-      if (rafId != null) window.cancelAnimationFrame(rafId)
-      window.removeEventListener('scroll', onScroll)
-    }
-  }, [])
+  const scrolled = useScrolled()
 
   useEffect(() => {
     if (!mobileOpen) return
@@ -322,18 +298,16 @@ export default function Navbar() {
 
   return (
     <header
-      className="fixed left-1/2 top-[24px] z-50 -translate-x-1/2"
+      className="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
       style={{
-        width: 'min(1150px, 90vw)',
-        opacity: isHidden ? 0 : 1,
-        transform: `translateY(${isHidden ? '-12px' : '0px'})`,
-        transition: 'opacity 240ms ease, transform 240ms ease',
-        pointerEvents: isHidden ? 'none' : 'auto',
+        height: BAR_HEIGHT_PX,
+        background: scrolled ? 'rgba(5,8,22,.85)' : 'transparent',
+        borderBottom: scrolled ? '1px solid rgba(255,255,255,.08)' : '1px solid transparent',
+        backdropFilter: scrolled ? 'blur(16px)' : 'none',
       }}
     >
-      <div className="flex items-center justify-between">
-
-        {/* Left: 52x52 rounded-square logo */}
+      <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
+        {/* Left: logo + name/title */}
         <a
           href="#about"
           onClick={(e) => {
@@ -341,32 +315,38 @@ export default function Navbar() {
             onSelect('about')
           }}
           aria-label="Go to About"
-          className="relative inline-flex items-center justify-center rounded-xl"
-          style={{
-            width: LOGO_PX,
-            height: LOGO_PX,
-            border: '1px solid rgba(255,255,255,.08)',
-            background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
-            boxShadow: '0 20px 50px rgba(0,0,0,0.45)',
-          }}
+          className="flex items-center gap-3"
         >
-          <span className="text-[18px] font-bold tracking-[-0.4px]" style={{ color: '#FFFFFF' }}>
-            M
+          <Logo />
+          <span className="hidden flex-col sm:flex">
+            <span className="text-[15px] font-bold leading-tight text-white">Mohamed Youssif</span>
+            <span className="text-xs leading-tight text-white/55">Frontend Developer</span>
           </span>
         </a>
 
-        {/* Right: 60px capsule navigation (desktop) */}
-        <DesktopNav activeId={activeId} onSelect={onSelect} />
+        {/* Center-right: links */}
+        <DesktopLinks activeId={activeId} onSelect={onSelect} />
 
-        {/* Mobile hamburger */}
-        <MobileMenu
-          activeId={activeId}
-          mobileOpen={mobileOpen}
-          onToggle={() => setMobileOpen((v) => !v)}
-          onSelect={onSelect}
-        />
+        {/* Right: CV download (desktop) + mobile menu */}
+        <div className="flex items-center gap-3">
+          <a
+            href="/Cv.pdf"
+            download
+            className="hidden items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 md:inline-flex"
+          >
+            <Download className="h-4 w-4" />
+            Download CV
+          </a>
+
+          <MobileMenu
+            activeId={activeId}
+            mobileOpen={mobileOpen}
+            onOpen={() => setMobileOpen(true)}
+            onClose={() => setMobileOpen(false)}
+            onSelect={onSelect}
+          />
+        </div>
       </div>
     </header>
   )
 }
-

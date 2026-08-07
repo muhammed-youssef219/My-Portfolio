@@ -220,17 +220,7 @@ export default function FeaturedProjects() {
       liveUrl: 'https://homeverse-master-smoky.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/Homeverse-Master.git',
     },
-    {
-      number: '',
-      title: 'Kingdom Schools – Modern Educational Platform',
-      description:
-        'Developed a fully responsive educational website for Kingdom Schools using React, TypeScript, and Tailwind CSS. The application features a modern user interface with smooth navigation, animated sections, reusable components, and optimized performance. The project focuses on delivering an intuitive user experience across all devices while maintaining clean architecture, scalability, and maintainable code. It demonstrates best practices in modern frontend development, including responsive layouts, component reusability, and professional UI design.',
-      category: 'Frontend Development',
-      tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'React Router DOM', 'React Hook Form', 'Framer Motion' ],
-      imageSrc: '/kingdom.png',
-      liveUrl: 'https://kingdom-schools.vercel.app/',
-      githubUrl: 'https://github.com/my7422362-wq/kingdom-schools.git',
-    },
+  
 
 
 {
@@ -245,6 +235,34 @@ export default function FeaturedProjects() {
       githubUrl: 'https://github.com/my7422362-wq/El---sabah.git',
     },
 
+
+
+
+  {
+      number: '',
+      title: 'Vortexatechnoloies Business Website',
+      description:
+        'A modern and responsive website for VortexTechnology, showcasing the companys software development, mobile applications, custom systems, digital marketing, cybersecurity, server management, and game hosting services through a premium interactive interface. ',
+      category: 'Frontend Development',
+      tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'React Router DOM', 'React Hook Form', 'Framer Motion' ],
+      imageSrc: '/vortexa.png',
+      liveUrl: 'https://vortexatechnologies-website.vercel.app/',
+      githubUrl: 'https://github.com/my7422362-wq/Vortexatechnologies-Website.git',
+    },
+
+
+
+  {
+      number: '',
+      title: 'Kingdom Schools – Modern Educational Platform',
+      description:
+        'Developed a fully responsive educational website for Kingdom Schools using React, TypeScript, and Tailwind CSS. The application features a modern user interface with smooth navigation, animated sections, reusable components, and optimized performance. The project focuses on delivering an intuitive user experience across all devices while maintaining clean architecture, scalability, and maintainable code. It demonstrates best practices in modern frontend development, including responsive layouts, component reusability, and professional UI design.',
+      category: 'Frontend Development',
+      tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'React Router DOM', 'React Hook Form', 'Framer Motion' ],
+      imageSrc: '/kingdom.png',
+      liveUrl: 'https://kingdom-schools.vercel.app/',
+      githubUrl: 'https://github.com/my7422362-wq/kingdom-schools.git',
+    },
 
     {
       number: '',

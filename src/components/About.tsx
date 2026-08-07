@@ -127,7 +127,7 @@ export default function About() {
               </p>
 
               <motion.a
-                href="/Muhammed Youssef.CV.pdf"
+                href="/Cv.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex w-fit items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-6 py-3 text-sm font-semibold text-white/90 backdrop-blur transition hover:bg-white/10"
