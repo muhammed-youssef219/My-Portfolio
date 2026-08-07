@@ -137,7 +137,7 @@ export default function PremiumFooter() {
               transition={{ duration: 0.5, ease: 'easeOut' }}
               className="text-sm font-semibold text-white/70"
             >
-              © 2026 Mohamed Youssef. All Rights Reserved.
+              © 2026 Muhammed Youssef. All Rights Reserved.
             </motion.div>
 
             <motion.div
