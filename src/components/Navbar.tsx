@@ -186,7 +186,7 @@ function MobileMenu({
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.25 }}
+                transition={{ duration: 0.3, ease: 'easeOut' }}
               />
 
               <motion.div
@@ -194,6 +194,7 @@ function MobileMenu({
                 style={{
                   background: 'linear-gradient(180deg, #0b1020 0%, #050816 100%)',
                   boxShadow: '-24px 0 60px rgba(0,0,0,.55)',
+                  willChange: 'transform',
                 }}
                 role="dialog"
                 aria-modal="true"
@@ -201,7 +202,7 @@ function MobileMenu({
                 initial={{ x: '100%' }}
                 animate={{ x: 0 }}
                 exit={{ x: '100%' }}
-                transition={{ duration: 0.32, ease: [0.16, 1, 0.3, 1] }}
+                transition={{ type: 'spring', stiffness: 340, damping: 34, mass: 0.9 }}
               >
                 <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
                   <div className="flex items-center gap-3">

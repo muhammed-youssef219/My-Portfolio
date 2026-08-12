@@ -50,23 +50,6 @@ const GlowButton = ({
   )
 }
 
-const AvailabilityBadge = () => {
-  return (
-    <motion.div
-      className="inline-flex w-fit items-center gap-2.5 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-xs font-medium text-white/85 backdrop-blur"
-      initial={{ opacity: 0, y: -8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-    >
-      <span className="relative flex h-2 w-2">
-        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-        <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-      </span>
-      Available for freelance projects
-    </motion.div>
-  )
-}
-
 const TechBadge = ({ icon, label, delay }: { icon: ReactNode; label: string; delay: number }) => {
   return (
     <motion.div
@@ -146,8 +129,6 @@ export default function Hero() {
               transition={{ duration: 0.65 }}
             >
               <div className="flex flex-col gap-5">
-                <AvailabilityBadge />
-
                 <h1 className="flex flex-col gap-1.5 text-[36px] leading-[0.95] font-bold tracking-[-1.3px] text-white sm:text-[42px] md:text-[54px]">
                   <span>Frontend Developer</span>
                   <span className="sm:whitespace-nowrap">

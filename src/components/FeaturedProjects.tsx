@@ -264,18 +264,7 @@ export default function FeaturedProjects() {
       githubUrl: 'https://github.com/my7422362-wq/kingdom-schools.git',
     },
 
-    {
-      number: '',
-      title: 'Trips – Travel & Tourism Platform',
-      description:
-        'A modern travel platform built with React, TypeScript, and Tailwind CSS, featuring a responsive interface, seamless navigation, reusable components, and an engaging user experience for discovering and exploring destinations.',
-      category: 'Frontend Development',
-      tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'React Router DOM', 'react Hook Form', 'Framer Motion'],
-      imageSrc: '/trip.png',
-      liveUrl: 'https://trips-two-hazel.vercel.app/',
-      githubUrl: 'https://github.com/my7422362-wq/Trips.git',
-    },
-
+   
     {
       number: '',
       title: 'Medical Clinic',
