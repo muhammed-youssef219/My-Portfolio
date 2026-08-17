@@ -209,6 +209,26 @@ export default function FeaturedProjects() {
       liveUrl: 'https://fresh-cart-ecommerce-uhhb.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/FreshCart-ecommerce.git',
     },
+
+
+
+{
+      number: '',
+      title: 'Homie — Furniture E-Commerce Platform   ',
+      description:
+        '    A full-featured furniture storefront built from scratch in React, covering the complete shopping flow: browsing by category or room, real-time search, multi-filter product discovery (category, room, price range, on-sale), a persistent cart and wishlist, and a WhatsApp-based checkout that hands off the full order (items, quantities, prices, photos) directly to a business number. The UI includes a cinematic animated hero (parallax tilt + Ken Burns zoom), a full light/dark theme system, and a fully responsive layout tuned across mobile, tablet, and desktop. ',
+      category: 'Frontend Development',
+      tech: ['React.js', 'TypeScript', 'Tailwind CSS', ' Zustand', '  lucide-react ', 'React Router DOM' , '  react-hot-toast'],
+      imageSrc: '/homie.png',
+      liveUrl: 'https://homie-furniture.vercel.app/',
+      githubUrl: 'https://github.com/my7422362-wq/homie-furniture.git',
+    },
+
+
+
+
+
+
     {
       number: '',
       title: 'Modern Real Estate Platform',
