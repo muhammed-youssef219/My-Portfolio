@@ -3,12 +3,18 @@ import { ExternalLink } from "lucide-react";
 import type { ReactNode } from 'react'
 
 
+type TechGroup = {
+  label: string
+  items: string[]
+}
+
 type Project = {
   number: string
   title: string
   description: string
   category: string
   tech: string[]
+  techGroups?: TechGroup[]
   imageSrc: string
   liveUrl: string
   githubUrl: string
@@ -154,13 +160,28 @@ function ProjectCard({
 
         <h3 className="mt-3 text-lg font-bold tracking-[-0.3px] text-white md:text-xl">{project.title}</h3>
 
-        <p className="mt-2 line-clamp-2 text-sm leading-relaxed text-white/70">{project.description}</p>
+        <p className="mt-2 text-sm leading-relaxed text-white/70">{project.description}</p>
 
-        <div className="mt-3 flex flex-wrap gap-2">
-          {project.tech.map((t) => (
-            <TechBadge key={t}>{t}</TechBadge>
-          ))}
-        </div>
+        {project.techGroups ? (
+          <div className="mt-3 flex flex-col gap-2.5">
+            {project.techGroups.map((group) => (
+              <div key={group.label} className="flex flex-wrap items-center gap-2">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/40">
+                  {group.label}
+                </span>
+                {group.items.map((t) => (
+                  <TechBadge key={t}>{t}</TechBadge>
+                ))}
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="mt-3 flex flex-wrap gap-2">
+            {project.tech.map((t) => (
+              <TechBadge key={t}>{t}</TechBadge>
+            ))}
+          </div>
+        )}
 
         <div className="mt-auto pt-4 flex flex-wrap items-center gap-2">
           {index === 5 ? (
@@ -194,6 +215,53 @@ function ProjectCard({
 
 export default function FeaturedProjects() {
   const projects: Project[] = [
+
+
+
+
+{
+      number: '',
+      title: 'Taalom — Full-Stack Learning Management Platform',
+      description:
+        'A full-stack, bilingual Learning Management System that connects multiple independent teachers with students across subjects — each with their own courses, live classes, and quizzes. Built with React 19 and a self-hosted Laravel API, featuring role-based dashboards, OTP authentication, a payment-approval workflow, and live video classrooms — deployed end-to-end with a custom domain, SSL, and transactional email pipeline.',
+      category: 'FullStack Development',
+      tech: [],
+      techGroups: [
+        {
+          label: 'Frontend',
+          items: [
+            'React 19',
+            'TypeScript',
+            'Vite',
+            'Tailwind CSS v4',
+            'React Router v7',
+            'TanStack Query',
+            'react-hook-form',
+            'Zod',
+            'Axios',
+            'Framer Motion',
+            'i18next (AR/EN, RTL)',
+            'Vercel',
+          ],
+        },
+        {
+          label: 'Backend',
+          items: [
+            'Laravel 13 (PHP 8.3)',
+            'Laravel Sanctum',
+            'MySQL',
+            'Laravel Queues',
+            'Resend API',
+            'nginx + aaPanel',
+            'systemd',
+            "Let's Encrypt SSL",
+          ],
+        },
+      ],
+      imageSrc: '/talom.png',
+      liveUrl: 'https://teacher-platform-blond.vercel.app/',
+      githubUrl: 'https://github.com/muhammed-youssef219/Teacher-Platform.git',
+    },
 
 
 
