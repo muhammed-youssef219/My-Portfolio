@@ -6,15 +6,17 @@ import {
   Download,
   Menu,
   X,
+  Home,
   User,
   FolderKanban,
   Sparkles,
+  Award,
   MessageCircle,
   Layers,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
 
-type SectionId = 'about' | 'projects' | 'skills' | 'contact' | 'footer'
+type SectionId = 'home' | 'about' | 'projects' | 'skills' | 'certifications' | 'contact' | 'footer'
 
 type NavItem = {
   id: SectionId
@@ -23,9 +25,11 @@ type NavItem = {
 }
 
 const NAV_ITEMS: NavItem[] = [
+  { id: 'home', label: 'Home', icon: Home },
   { id: 'about', label: 'About', icon: User },
   { id: 'projects', label: 'Projects', icon: FolderKanban },
   { id: 'skills', label: 'Skills', icon: Sparkles },
+  { id: 'certifications', label: 'Certifications', icon: Award },
   { id: 'contact', label: 'Contact', icon: MessageCircle },
   { id: 'footer', label: 'Footer', icon: Layers },
 ]
@@ -310,12 +314,12 @@ export default function Navbar() {
       <div className="mx-auto flex h-full max-w-6xl items-center justify-between px-6">
         {/* Left: logo + name/title */}
         <a
-          href="#about"
+          href="#home"
           onClick={(e) => {
             e.preventDefault()
-            onSelect('about')
+            onSelect('home')
           }}
-          aria-label="Go to About"
+          aria-label="Go to Home"
           className="flex items-center gap-3"
         >
           <Logo />

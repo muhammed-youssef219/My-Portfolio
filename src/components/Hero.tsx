@@ -106,7 +106,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative overflow-hidden bg-[#050816] pt-[84px]">
+    <section id="home" className="relative overflow-hidden bg-[#050816] pt-[84px]">
       {/* Background */}
       <div className="pointer-events-none absolute inset-0">
         <div className="absolute left-[-10%] top-[-20%] h-[520px] w-[520px] rounded-full bg-[#8B5CF6]/25 blur-[120px]" />
@@ -195,7 +195,7 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}
               >
-                <img src="/me.jpeg" alt="Muhammed Youssef" className="h-full w-full object-cover" />
+                <img src="/hero.jpeg" alt="Muhammed Youssef" className="h-full w-full object-cover" />
               </motion.div>
             </motion.div>
           </div>

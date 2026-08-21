@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { ExternalLink } from "lucide-react";
+import { useState } from 'react'
 import type { ReactNode } from 'react'
 
 
@@ -46,6 +47,36 @@ const CategoryPill = ({ children }: { children: ReactNode }) => {
     <span className="inline-flex items-center rounded-full border border-[#1E1E1E] bg-[#111111] px-3.5 py-1 text-xs font-semibold text-white/80">
       {children}
     </span>
+  )
+}
+
+const FILTERS = [
+  { label: 'All', value: 'all' },
+  { label: 'Frontend', value: 'Frontend Development' },
+  { label: 'Full Stack', value: 'FullStack Development' },
+] as const
+
+const FilterTab = ({
+  active,
+  onClick,
+  children,
+}: {
+  active: boolean
+  onClick: () => void
+  children: ReactNode
+}) => {
+  return (
+    <button
+      type="button"
+      onClick={onClick}
+      className={`relative rounded-full px-5 py-2.5 text-sm font-semibold transition ${
+        active
+          ? 'bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white shadow-[0_10px_30px_-10px_rgba(139,92,246,.55)]'
+          : 'border border-[#1E1E1E] bg-[#111111] text-white/70 hover:border-white/20 hover:text-white'
+      }`}
+    >
+      {children}
+    </button>
   )
 }
 
@@ -184,7 +215,7 @@ function ProjectCard({
         )}
 
         <div className="mt-auto pt-4 flex flex-wrap items-center gap-2">
-          {index === 5 ? (
+          {project.title === 'El Sabah – Corporate Business Website' ? (
             <LuxuryButton
               variant="primary"
               href={'https://www.behance.net/'}
@@ -214,6 +245,8 @@ function ProjectCard({
 }
 
 export default function FeaturedProjects() {
+  const [activeFilter, setActiveFilter] = useState<string>('all')
+
   const projects: Project[] = [
 
 
@@ -266,17 +299,7 @@ export default function FeaturedProjects() {
 
 
     
-    {
-      number: '',
-      title: 'FreshCart – Modern E-Commerce',
-      description:
-        'A modern and responsive e-commerce frontend application built with React, TypeScript, and Tailwind CSS. FreshCart provides a seamless shopping experience with product browsing, category filtering, search, product details, shopping cart, wishlist, and a responsive checkout flow. The project focuses on clean architecture, reusable components, scalable code, and an optimized user experience across all devices.',
-      category: 'Frontend Development',
-      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'React Router DOM', 'React Hook Form', 'Axios'],
-      imageSrc: '/freshcart.png',
-      liveUrl: 'https://fresh-cart-ecommerce-uhhb.vercel.app/',
-      githubUrl: 'https://github.com/my7422362-wq/FreshCart-ecommerce.git',
-    },
+   
 
 
 
@@ -294,6 +317,50 @@ export default function FeaturedProjects() {
 
 
 
+
+     {
+      number: '',
+      title: 'FreshCart – Modern E-Commerce',
+      description:
+        'A modern and responsive e-commerce frontend application built with React, TypeScript, and Tailwind CSS. FreshCart provides a seamless shopping experience with product browsing, category filtering, search, product details, shopping cart, wishlist, and a responsive checkout flow. The project focuses on clean architecture, reusable components, scalable code, and an optimized user experience across all devices.',
+      category: 'Frontend Development',
+      tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'React Router DOM', 'React Hook Form', 'Axios'],
+      imageSrc: '/freshcart.png',
+      liveUrl: 'https://fresh-cart-ecommerce-uhhb.vercel.app/',
+      githubUrl: 'https://github.com/my7422362-wq/FreshCart-ecommerce.git',
+    },
+
+
+
+
+ {
+      number: '',
+      title: 'ATHAR — Full-Stack E-Commerce Platform',
+      description:
+        'Full-stack e-commerce storefront and admin dashboard built for an Egyptian menswear "local brand." Includes a customer-facing store (product catalog with color/size variants, cart, checkout, order tracking) and a complete admin dashboard for managing products, categories, orders, homepage content, navigation, and site branding — all backed by a real relational database and JWT-authenticated APIs, not a static template. ',
+      category: 'FullStack Development',
+      tech: [],
+      techGroups: [
+        {
+          label: 'Frontend',
+          items: ['Next.js 16 (App Router)', 'TypeScript', 'Tailwind CSS v4', 'Zustand', 'Turbopack'],
+        },
+        {
+          label: 'Backend',
+          items: [
+            'PostgreSQL (Neon)',
+            'Prisma ORM',
+            'JWT (httpOnly cookies)',
+            'bcrypt',
+            'Vercel Blob',
+            'Vercel Deployment',
+          ],
+        },
+      ],
+      imageSrc: '/local brand.png',
+      liveUrl: 'https://local-brand-eight.vercel.app/',
+      githubUrl: 'https://github.com/muhammed-youssef219/ATHAR--Localbrand.git',
+    },
 
 
 
@@ -353,18 +420,7 @@ export default function FeaturedProjects() {
     },
 
    
-    {
-      number: '',
-      title: 'Medical Clinic',
-      description:
-        'A fully responsive Medical Clinic web application with a modern UI/UX design that simulates a real-world healthcare platform. It allows patients to browse doctors, view services, and book appointments through a smooth and intuitive user experience. The project focuses on clean architecture, usability, and performance to deliver a production-like interface for clinic management.',
-      category: 'UI/UX Design',
-      tech: ['Figma', 'Wireframing', 'Prototyping', 'Responsive Design', 'Design System', 'UI/UX Design'],
-      imageSrc: '/medical clinic.png',
-      liveUrl: 'https://www.behance.net/gallery/245026633/Medical-Clinic-App',
-      githubUrl: '',
-    },
-
+    
 
 
   ]
@@ -384,10 +440,24 @@ export default function FeaturedProjects() {
 ."
         />
 
-        <div className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects.map((project, index) => (
-            <ProjectCard key={`${project.number}-${index}`} project={project} index={index} />
+        <div className="mt-8 flex flex-wrap gap-3">
+          {FILTERS.map((filter) => (
+            <FilterTab
+              key={filter.value}
+              active={activeFilter === filter.value}
+              onClick={() => setActiveFilter(filter.value)}
+            >
+              {filter.label}
+            </FilterTab>
           ))}
+        </div>
+
+        <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+          {projects
+            .filter((project) => activeFilter === 'all' || project.category === activeFilter)
+            .map((project, index) => (
+              <ProjectCard key={project.title} project={project} index={index} />
+            ))}
         </div>
       </div>
     </section>

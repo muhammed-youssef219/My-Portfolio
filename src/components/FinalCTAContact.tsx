@@ -70,11 +70,19 @@ const ContactRow = ({
         {icon}
       </span>
 
-      <span className="relative z-10 min-w-0 flex-1 overflow-hidden flex items-start">
+      <span className="relative z-10 flex min-w-0 flex-1 flex-col items-start overflow-hidden">
 
         <span className="block text-[12px] font-semibold tracking-[0.18em] text-white/60 [@media(max-width:639px)]:text-[11px]">{label}</span>
-        <span className="block min-w-0 pt-1 text-sm font-semibold text-white/90 break-all overflow-wrap:anywhere [word-break:break-word] [@media(min-width:640px)]:break-words [@media(max-width:639px)]:text-[13px]">
-          {value}
+        <span className="block min-w-0 w-full pt-1 text-sm font-semibold text-white/90 break-words [@media(max-width:639px)]:text-[13px]">
+          {value.includes('@') ? (
+            <>
+              {value.slice(0, value.indexOf('@') + 1)}
+              <wbr />
+              {value.slice(value.indexOf('@') + 1)}
+            </>
+          ) : (
+            value
+          )}
         </span>
       </span>
 
