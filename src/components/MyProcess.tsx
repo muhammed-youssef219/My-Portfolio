@@ -10,22 +10,16 @@ import {
 import type { ReactNode } from 'react'
 
 const SectionHeading = ({
-  eyebrow,
   title,
   subtitle,
 }: {
-  eyebrow: string
   title: string
   subtitle: string
 }) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="inline-flex items-center gap-3">
-        <span className="h-[1px] w-10 bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] opacity-80" />
-        <span className="text-xs font-semibold tracking-[0.26em] text-white/70">{eyebrow}</span>
-      </div>
-      <h2 className="text-[40px] leading-[1.06] font-bold tracking-[-1px] text-white md:text-[54px]">{title}</h2>
-      <p className="max-w-[720px] text-base leading-relaxed text-white/70 md:text-lg">{subtitle}</p>
+      <h2 className="text-[40px] leading-[1.06] font-bold tracking-[-1px] text-[var(--text)] md:text-[54px]">{title}</h2>
+      <p className="max-w-[720px] text-base leading-relaxed text-[var(--text)]/70 md:text-lg">{subtitle}</p>
     </div>
   )
 }
@@ -39,12 +33,12 @@ function StepIcon({
 }) {
   const cls =
     tone === 'violet'
-      ? 'border-[#8B5CF6]/25 bg-[#8B5CF6]/10 text-[#8B5CF6]'
-      : 'border-[#06B6D4]/25 bg-[#06B6D4]/10 text-[#06B6D4]'
+      ? 'border-[#64748B]/25 bg-[#64748B]/10 text-[#64748B]'
+      : 'border-[#64748B]/25 bg-[#64748B]/10 text-[#64748B]'
 
   return (
     <span
-      className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl border ${cls} ring-1 ring-white/10`}
+      className={`inline-flex h-11 w-11 items-center justify-center rounded-2xl border ${cls} ring-1 ring-[var(--text)]/10`}
       aria-hidden
     >
       {children}
@@ -70,7 +64,7 @@ function ProcessCard({
 }) {
   return (
     <motion.div
-      className="group relative flex h-full flex-col rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur transition"
+      className="group relative flex h-full flex-col rounded-[24px] border border-[var(--text)]/10 bg-[var(--text)]/5 p-6 backdrop-blur transition"
       initial={{ opacity: 0, y: 18 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-10% 0px -10% 0px' }}
@@ -83,7 +77,7 @@ function ProcessCard({
         className="pointer-events-none absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
         style={{
           background:
-            'linear-gradient(135deg, rgba(139,92,246,0.18) 0%, rgba(6,182,212,0.12) 45%, rgba(255,255,255,0) 70%)',
+            'linear-gradient(135deg, rgba(100,116,139,0.18) 0%, rgba(100,116,139,0.12) 45%, rgba(255,255,255,0) 70%)',
         }}
       />
 
@@ -93,25 +87,25 @@ function ProcessCard({
             <StepIcon tone={step.tone}>
               <span className="h-5 w-5">{step.icon}</span>
             </StepIcon>
-            <div className="text-sm font-semibold tracking-[-0.15px] text-white/95">{step.title}</div>
+            <div className="text-sm font-semibold tracking-[-0.15px] text-[var(--text)]/95">{step.title}</div>
           </div>
 
           <div className="mt-4 grid gap-2">
             <div className="flex items-baseline gap-3">
-              <div className="text-[54px] leading-none font-bold tracking-[-1.4px] text-white/95">
+              <div className="text-[54px] leading-none font-bold tracking-[-1.4px] text-[var(--text)]/95">
                 {step.number}
               </div>
-              <div className="h-[1px] w-10 bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+              <div className="h-[1px] w-10 bg-gradient-to-r from-[var(--text)]/10 via-[var(--text)]/5 to-transparent" />
             </div>
 
-            <p className="text-sm leading-relaxed text-white/70 md:text-[14px]">{step.description}</p>
+            <p className="text-sm leading-relaxed text-[var(--text)]/70 md:text-[14px]">{step.description}</p>
           </div>
         </div>
       </div>
 
-      <div className="relative mt-6 h-[1px] w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+      <div className="relative mt-6 h-[1px] w-full bg-gradient-to-r from-[var(--text)]/10 via-[var(--text)]/5 to-transparent" />
 
-      <div className="relative mt-5 text-xs font-semibold tracking-wide text-white/55">
+      <div className="relative mt-5 text-xs font-semibold tracking-wide text-[var(--text)]/55">
         {step.id === 'discovery' && 'Align on what success looks like'}
         {step.id === 'research' && 'Find patterns, gaps and defensible value'}
         {step.id === 'design' && 'Design for clarity, flow and usability'}
@@ -182,15 +176,14 @@ export default function MyProcess() {
   ]
 
   return (
-    <section id="process" className="relative overflow-hidden bg-[#050816] py-20 md:py-28">
+    <section id="process" className="relative overflow-hidden bg-[var(--bg)] py-20 md:py-28">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-14%] top-[-30%] h-[540px] w-[540px] rounded-full bg-[#8B5CF6]/10 blur-[120px]" />
-        <div className="absolute right-[-16%] top-[-10%] h-[520px] w-[520px] rounded-full bg-[#06B6D4]/8 blur-[120px]" />
+        <div className="absolute left-[-14%] top-[-30%] h-[540px] w-[540px] rounded-full bg-[var(--glow-primary)] blur-[120px]" />
+        <div className="absolute right-[-16%] top-[-10%] h-[520px] w-[520px] rounded-full bg-[var(--glow-secondary)] blur-[120px]" />
       </div>
 
       <div className="relative mx-auto w-full max-w-6xl px-6">
         <SectionHeading
-          eyebrow="MY PROCESS"
           title="A workflow that ships quality"
           subtitle="A senior product mindset: align goals, design for clarity, build with scalable architecture, then optimize and deliver with confidence."
         />
@@ -202,7 +195,7 @@ export default function MyProcess() {
             <div
               aria-hidden
               className="pointer-events-none absolute left-0 right-0 top-[90px] h-[1px]"
-              style={{ background: 'linear-gradient(to right, rgba(139,92,246,0.65), rgba(6,182,212,0.45))' }}
+              style={{ background: 'linear-gradient(to right, rgba(100,116,139,0.65), rgba(100,116,139,0.45))' }}
             />
 
             {steps.map((step, i) => (
@@ -214,12 +207,12 @@ export default function MyProcess() {
                   style={{
                     background:
                       step.tone === 'violet'
-                        ? 'rgba(139,92,246,0.95)'
-                        : 'rgba(6,182,212,0.95)',
+                        ? 'rgba(100,116,139,0.95)'
+                        : 'rgba(100,116,139,0.95)',
                     boxShadow:
                       step.tone === 'violet'
-                        ? '0 0 24px rgba(139,92,246,0.35)'
-                        : '0 0 24px rgba(6,182,212,0.30)',
+                        ? '0 0 24px rgba(100,116,139,0.35)'
+                        : '0 0 24px rgba(100,116,139,0.30)',
                   }}
                 />
                 <ProcessCard step={step} index={i} />
@@ -228,7 +221,7 @@ export default function MyProcess() {
           </div>
 
           {/* thin border under rail */}
-          <div className="mt-8 h-[1px] w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+          <div className="mt-8 h-[1px] w-full bg-gradient-to-r from-[var(--text)]/10 via-[var(--text)]/5 to-transparent" />
         </div>
 
         {/* Tablet layout: 2 columns */}
@@ -243,7 +236,7 @@ export default function MyProcess() {
           <div className="relative">
             <div
               aria-hidden
-              className="absolute left-[22px] top-2 bottom-0 w-[1px] bg-gradient-to-b from-[#8B5CF6]/40 via-white/10 to-[#06B6D4]/30"
+              className="absolute left-[22px] top-2 bottom-0 w-[1px] bg-gradient-to-b from-[#64748B]/40 via-[var(--text)]/10 to-[#64748B]/30"
             />
             <div className="space-y-6">
               {steps.map((step, i) => (
@@ -254,12 +247,12 @@ export default function MyProcess() {
                     style={{
                       background:
                         step.tone === 'violet'
-                          ? 'rgba(139,92,246,0.95)'
-                          : 'rgba(6,182,212,0.95)',
+                          ? 'rgba(100,116,139,0.95)'
+                          : 'rgba(100,116,139,0.95)',
                       boxShadow:
                         step.tone === 'violet'
-                          ? '0 0 28px rgba(139,92,246,0.35)'
-                          : '0 0 28px rgba(6,182,212,0.30)',
+                          ? '0 0 28px rgba(100,116,139,0.35)'
+                          : '0 0 28px rgba(100,116,139,0.30)',
                     }}
                   />
                   {/* reuse card but remove large number dominance on small screens */}
@@ -268,7 +261,7 @@ export default function MyProcess() {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true, margin: '-15% 0px -10% 0px' }}
                     transition={{ duration: 0.6, delay: i * 0.03 }}
-                    className="group relative rounded-[24px] border border-white/10 bg-white/5 p-6 backdrop-blur"
+                    className="group relative rounded-[24px] border border-[var(--text)]/10 bg-[var(--text)]/5 p-6 backdrop-blur"
                   >
                     <div className="flex items-start justify-between gap-5">
                       <div className="min-w-0">
@@ -276,17 +269,17 @@ export default function MyProcess() {
                           <StepIcon tone={step.tone}>
                             <span className="h-5 w-5">{step.icon}</span>
                           </StepIcon>
-                          <div className="text-sm font-semibold tracking-[-0.15px] text-white/95">{step.title}</div>
+                          <div className="text-sm font-semibold tracking-[-0.15px] text-[var(--text)]/95">{step.title}</div>
                         </div>
                         <div className="mt-4 flex items-baseline gap-3">
-                          <div className="text-[38px] leading-none font-bold tracking-[-1.0px] text-white/95">
+                          <div className="text-[38px] leading-none font-bold tracking-[-1.0px] text-[var(--text)]/95">
                             {step.number}
                           </div>
-                          <div className="h-[1px] w-9 bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
+                          <div className="h-[1px] w-9 bg-gradient-to-r from-[var(--text)]/10 via-[var(--text)]/5 to-transparent" />
                         </div>
-                        <p className="mt-3 text-sm leading-relaxed text-white/70">{step.description}</p>
-                        <div className="mt-5 h-[1px] w-full bg-gradient-to-r from-white/10 via-white/5 to-transparent" />
-                        <div className="mt-5 text-xs font-semibold tracking-wide text-white/55">
+                        <p className="mt-3 text-sm leading-relaxed text-[var(--text)]/70">{step.description}</p>
+                        <div className="mt-5 h-[1px] w-full bg-gradient-to-r from-[var(--text)]/10 via-[var(--text)]/5 to-transparent" />
+                        <div className="mt-5 text-xs font-semibold tracking-wide text-[var(--text)]/55">
                           {step.id === 'discovery' && 'Align on what success looks like'}
                           {step.id === 'research' && 'Find patterns, gaps and defensible value'}
                           {step.id === 'design' && 'Design for clarity, flow and usability'}

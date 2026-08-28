@@ -22,29 +22,23 @@ type Project = {
 }
 
 const SectionHeading = ({
-  eyebrow,
   title,
   subtitle,
 }: {
-  eyebrow: string
   title: string
   subtitle: string
 }) => {
   return (
     <div className="flex flex-col gap-4">
-      <div className="inline-flex items-center gap-3">
-        <span className="h-[1px] w-10 bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] opacity-80" />
-        <span className="text-xs font-semibold tracking-[0.26em] text-white/70">{eyebrow}</span>
-      </div>
-      <h2 className="text-[40px] leading-[1.06] font-bold tracking-[-1px] text-white md:text-[54px]">{title}</h2>
-      <p className="max-w-[720px] text-base leading-relaxed text-white/70 md:text-lg">{subtitle}</p>
+      <h2 className="text-[40px] leading-[1.06] font-bold tracking-[-1px] text-[var(--text)] md:text-[54px]">{title}</h2>
+      <p className="max-w-[720px] text-base leading-relaxed text-[var(--text)]/70 md:text-lg">{subtitle}</p>
     </div>
   )
 }
 
 const CategoryPill = ({ children }: { children: ReactNode }) => {
   return (
-    <span className="inline-flex items-center rounded-full border border-[#1E1E1E] bg-[#111111] px-3.5 py-1 text-xs font-semibold text-white/80">
+    <span className="inline-flex items-center rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-3.5 py-1 text-xs font-semibold text-[var(--text)]/80">
       {children}
     </span>
   )
@@ -71,8 +65,8 @@ const FilterTab = ({
       onClick={onClick}
       className={`relative rounded-full px-5 py-2.5 text-sm font-semibold transition ${
         active
-          ? 'bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] text-white shadow-[0_10px_30px_-10px_rgba(139,92,246,.55)]'
-          : 'border border-[#1E1E1E] bg-[#111111] text-white/70 hover:border-white/20 hover:text-white'
+          ? 'bg-gradient-to-r from-[#64748B] to-[#64748B] text-white shadow-[0_10px_30px_-10px_rgba(100,116,139,.55)]'
+          : 'border border-[var(--card-border)] bg-[var(--surface)] text-[var(--text)]/70 hover:border-[var(--text)]/20 hover:text-[var(--text)]'
       }`}
     >
       {children}
@@ -82,7 +76,7 @@ const FilterTab = ({
 
 const TechBadge = ({ children }: { children: ReactNode }) => {
   return (
-    <span className="rounded-full border border-white/10 bg-white/5 px-3 py-1 text-xs font-medium text-white/80">
+    <span className="rounded-full border border-[var(--text)]/10 bg-[var(--text)]/5 px-3 py-1 text-xs font-medium text-[var(--text)]/80">
       {children}
     </span>
   )
@@ -104,17 +98,17 @@ const LuxuryButton = ({
   rel?: string
 }) => {
   const base =
-    'group relative inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#06B6D4]/40'
+    'group relative inline-flex items-center justify-center gap-2 rounded-full px-4 py-2 text-sm font-semibold transition focus:outline-none focus-visible:ring-2 focus-visible:ring-[#64748B]/40'
 
   const variantClass =
     variant === 'primary'
-      ? 'bg-[#111111] text-white ring-1 ring-[#1E1E1E] hover:bg-[#111111]'
-      : 'bg-[#0B1020]/50 text-white/90 ring-1 ring-white/10 hover:bg-[#0B1020]/70'
+      ? 'bg-[var(--surface)] text-[var(--text)] ring-1 ring-[var(--card-border)] hover:bg-[var(--surface)]'
+      : 'bg-[var(--surface-2)]/50 text-[var(--text)]/90 ring-1 ring-[var(--text)]/10 hover:bg-[var(--surface-2)]/70'
 
   const sheen =
     variant === 'primary'
-      ? 'before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle_at_20%_0%,rgba(139,92,246,0.35),transparent_55%)] before:opacity-0 before:transition-opacity before:duration-500 group-hover:before:opacity-100'
-      : 'before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle_at_20%_0%,rgba(6,182,212,0.25),transparent_55%)] before:opacity-0 before:transition-opacity before:duration-500 group-hover:before:opacity-100'
+      ? 'before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle_at_20%_0%,rgba(100,116,139,0.35),transparent_55%)] before:opacity-0 before:transition-opacity before:duration-500 group-hover:before:opacity-100'
+      : 'before:absolute before:inset-0 before:rounded-full before:bg-[radial-gradient(circle_at_20%_0%,rgba(100,116,139,0.25),transparent_55%)] before:opacity-0 before:transition-opacity before:duration-500 group-hover:before:opacity-100'
 
   return (
     <a
@@ -127,7 +121,7 @@ const LuxuryButton = ({
       <span className="relative z-10">{children}</span>
       <span
         className="pointer-events-none absolute -inset-px rounded-full opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{ boxShadow: '0 0 0 1px rgba(139,92,246,0.20), 0 0 40px rgba(6,182,212,0.10)' }}
+        style={{ boxShadow: '0 0 0 1px rgba(100,116,139,0.20), 0 0 40px rgba(100,116,139,0.10)' }}
       />
     </a>
   )
@@ -142,15 +136,15 @@ function ProjectCard({
 }) {
   return (
     <motion.div
-      className="group relative flex h-full flex-col overflow-hidden rounded-[24px] border border-[#1E1E1E] bg-[#111111]"
+      className="group relative flex h-full flex-col overflow-hidden rounded-[24px] border border-[var(--card-border)] bg-[var(--surface)]"
       initial={{ opacity: 0, y: 14 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-12% 0px -12% 0px' }}
       transition={{ duration: 0.6, ease: 'easeOut', delay: index * 0.04 }}
       whileHover={{ scale: 1.01 }}
     >
-      <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-[#8B5CF6]/15 blur-[40px] opacity-60" />
-      <div aria-hidden className="pointer-events-none absolute -right-24 -bottom-24 h-56 w-56 rounded-full bg-[#06B6D4]/10 blur-[40px] opacity-60" />
+      <div aria-hidden className="pointer-events-none absolute -left-24 -top-24 h-56 w-56 rounded-full bg-[var(--glow-primary)] blur-[40px] opacity-60" />
+      <div aria-hidden className="pointer-events-none absolute -right-24 -bottom-24 h-56 w-56 rounded-full bg-[var(--glow-secondary)] blur-[40px] opacity-60" />
 
       {/* Equal image size + ratio (16:9) */}
       <div className="relative">
@@ -172,7 +166,7 @@ function ProjectCard({
             className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
             style={{
               background:
-                'linear-gradient(135deg, rgba(139,92,246,0.30) 0%, rgba(6,182,212,0.12) 45%, rgba(0,0,0,0) 70%)',
+                'linear-gradient(135deg, rgba(100,116,139,0.30) 0%, rgba(100,116,139,0.12) 45%, rgba(0,0,0,0) 70%)',
             }}
           />
         </div>
@@ -182,22 +176,22 @@ function ProjectCard({
       <div className="flex flex-1 flex-col p-4 md:p-5">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <div className="text-xs font-semibold tracking-[0.28em] text-white/55">{project.number}</div>
+            <div className="text-xs font-semibold tracking-[0.28em] text-[var(--text)]/55">{project.number}</div>
             <CategoryPill>{project.category}</CategoryPill>
           </div>
 
-         
+
         </div>
 
-        <h3 className="mt-3 text-lg font-bold tracking-[-0.3px] text-white md:text-xl">{project.title}</h3>
+        <h3 className="mt-3 text-lg font-bold tracking-[-0.3px] text-[var(--text)] md:text-xl">{project.title}</h3>
 
-        <p className="mt-2 text-sm leading-relaxed text-white/70">{project.description}</p>
+        <p className="mt-2 text-sm leading-relaxed text-[var(--text)]/70">{project.description}</p>
 
         {project.techGroups ? (
           <div className="mt-3 flex flex-col gap-2.5">
             {project.techGroups.map((group) => (
               <div key={group.label} className="flex flex-wrap items-center gap-2">
-                <span className="text-[10px] font-semibold uppercase tracking-[0.14em] text-white/40">
+                <span className="text-[11px] font-bold uppercase tracking-[0.14em] text-[var(--text)]/85">
                   {group.label}
                 </span>
                 {group.items.map((t) => (
@@ -215,29 +209,16 @@ function ProjectCard({
         )}
 
         <div className="mt-auto pt-4 flex flex-wrap items-center gap-2">
-          {project.title === 'El Sabah – Corporate Business Website' ? (
-            <LuxuryButton
-              variant="primary"
-              href={'https://www.behance.net/'}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View Behance
-            </LuxuryButton>
-          ) : (
-            <>
-              <LuxuryButton
-                variant="primary"
-                href={project.liveUrl}
-                icon={<ExternalLink className="h-4 w-4" />}
-              >
-                View
-              </LuxuryButton>
-              <LuxuryButton variant="secondary" href={project.githubUrl}>
-                GitHub
-              </LuxuryButton>
-            </>
-          )}
+          <LuxuryButton
+            variant="primary"
+            href={project.liveUrl}
+            icon={<ExternalLink className="h-4 w-4" />}
+          >
+            View
+          </LuxuryButton>
+          <LuxuryButton variant="secondary" href={project.githubUrl}>
+            GitHub
+          </LuxuryButton>
         </div>
       </div>
     </motion.div>
@@ -300,6 +281,75 @@ export default function FeaturedProjects() {
 
     
    
+{
+      number: '',
+      title: '  Al Nokhba Pos & Inventory Management System ',
+      description:
+        'A full-stack, production-grade point-of-sale and inventory management platform built for a real sanitary-supplies retail business, shipped as both a web app and a native Windows desktop application from a single codebase. The system replaced an entirely mock/local-only prototype with a real, persisted backend: authenticated role-based access (admin/manager/cashier) backed by Supabase Auth, a normalized PostgreSQL schema with Row-Level Security, and live-derived business metrics (customer/supplier stats computed from real sales and purchase history rather than stored aggregates). Every module — POS checkout, inventory with full stock-movement history, purchase order workflow (draft → approval → receiving, with automatic stock reconciliation), sales with duplication/refund handling, and analytics — reads and writes the same real database in real time. Packaged as a native desktop app via Tauri (Rust + WebView2), giving a fully offline-capable, installable Windows application alongside the web deployment. Fully localized in Arabic with RTL layout, real PDF/CSV report exports, and a responsive UI down to mobile.',
+      category: 'FullStack Development',
+      tech: [],
+      techGroups: [
+        {
+          label: 'Frontend',
+          items: ['React 19', 'TypeScript', 'Vite', 'Tailwind CSS v4', 'React Router v7', 'Recharts'],
+        },
+        {
+          label: 'Backend',
+          items: ['Supabase', 'PostgreSQL', 'Row-Level Security', 'Auth & Authorization'],
+        },
+        {
+          label: 'Desktop',
+          items: ['Tauri v2 (Rust + WebView2)', 'Windows Installer (MSI/NSIS)'],
+        },
+        {
+          label: 'Reporting/Export',
+          items: ['jsPDF', 'html2canvas-pro'],
+        },
+        {
+          label: 'Deployment',
+          items: ['Vercel', 'GitHub Actions-ready'],
+        },
+      ],
+      imageSrc: '/pos system.png',
+      liveUrl: 'https://alnokhba-pos-system.vercel.app/',
+      githubUrl: 'https://github.com/muhammed-youssef219/alnokhba-pos-system.git',
+    },
+
+
+
+
+
+{
+      number: '',
+      title: 'ATHAR — Full-Stack E-Commerce Platform',
+      description:
+        'Full-stack e-commerce storefront and admin dashboard built for an Egyptian menswear "local brand." Includes a customer-facing store (product catalog with color/size variants, cart, checkout, order tracking) and a complete admin dashboard for managing products, categories, orders, homepage content, navigation, and site branding — all backed by a real relational database and JWT-authenticated APIs, not a static template. ',
+      category: 'FullStack Development',
+      tech: [],
+      techGroups: [
+        {
+          label: 'Frontend',
+          items: ['Next.js 16 (App Router)', 'TypeScript', 'Tailwind CSS v4', 'Zustand', 'Turbopack'],
+        },
+        {
+          label: 'Backend',
+          items: [
+            'PostgreSQL (Neon)',
+            'Prisma ORM',
+            'JWT (httpOnly cookies)',
+            'bcrypt',
+            'Vercel Blob',
+            'Vercel Deployment',
+          ],
+        },
+      ],
+      imageSrc: '/local brand.png',
+      liveUrl: 'https://local-brand-eight.vercel.app/',
+      githubUrl: 'https://github.com/muhammed-youssef219/ATHAR--Localbrand.git',
+    },
+
+
+
 
 
 
@@ -333,34 +383,7 @@ export default function FeaturedProjects() {
 
 
 
- {
-      number: '',
-      title: 'ATHAR — Full-Stack E-Commerce Platform',
-      description:
-        'Full-stack e-commerce storefront and admin dashboard built for an Egyptian menswear "local brand." Includes a customer-facing store (product catalog with color/size variants, cart, checkout, order tracking) and a complete admin dashboard for managing products, categories, orders, homepage content, navigation, and site branding — all backed by a real relational database and JWT-authenticated APIs, not a static template. ',
-      category: 'FullStack Development',
-      tech: [],
-      techGroups: [
-        {
-          label: 'Frontend',
-          items: ['Next.js 16 (App Router)', 'TypeScript', 'Tailwind CSS v4', 'Zustand', 'Turbopack'],
-        },
-        {
-          label: 'Backend',
-          items: [
-            'PostgreSQL (Neon)',
-            'Prisma ORM',
-            'JWT (httpOnly cookies)',
-            'bcrypt',
-            'Vercel Blob',
-            'Vercel Deployment',
-          ],
-        },
-      ],
-      imageSrc: '/local brand.png',
-      liveUrl: 'https://local-brand-eight.vercel.app/',
-      githubUrl: 'https://github.com/muhammed-youssef219/ATHAR--Localbrand.git',
-    },
+ 
 
 
 
@@ -426,18 +449,16 @@ export default function FeaturedProjects() {
   ]
 
   return (
-    <section id="projects" className="relative overflow-hidden bg-[#050816] py-20 md:py-28">
+    <section id="projects" className="relative overflow-hidden bg-[var(--bg)] py-20 md:py-28">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute left-[-14%] top-[-20%] h-[520px] w-[520px] rounded-full bg-[#8B5CF6]/10 blur-[120px]" />
-        <div className="absolute right-[-16%] top-[5%] h-[520px] w-[520px] rounded-full bg-[#06B6D4]/8 blur-[120px]" />
+        <div className="absolute left-[-14%] top-[-20%] h-[520px] w-[520px] rounded-full bg-[var(--glow-primary)] blur-[120px]" />
+        <div className="absolute right-[-16%] top-[5%] h-[520px] w-[520px] rounded-full bg-[var(--glow-secondary)] blur-[120px]" />
       </div>
 
       <div className="relative mx-auto w-full max-w-6xl px-6">
         <SectionHeading
-          eyebrow="FEATURED"
           title="Featured Projects"
-          subtitle="A collection of projects focused on modern design, clean code, and exceptional user experiences.
-."
+          subtitle="A collection of projects focused on modern design, clean code, and exceptional user experiences."
         />
 
         <div className="mt-8 flex flex-wrap gap-3">

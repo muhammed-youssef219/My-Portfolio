@@ -13,8 +13,11 @@ import {
   Award,
   MessageCircle,
   Layers,
+  Sun,
+  Moon,
 } from 'lucide-react'
 import type { LucideIcon } from 'lucide-react'
+import { useTheme } from '../hooks/useTheme'
 
 type SectionId = 'home' | 'about' | 'projects' | 'skills' | 'certifications' | 'contact' | 'footer'
 
@@ -111,7 +114,7 @@ function Logo() {
     <span
       className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl"
       style={{
-        background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)',
+        background: '#64748B',
         border: '1px solid rgba(255,255,255,.08)',
       }}
     >
@@ -130,8 +133,8 @@ function DesktopLinks({ activeId, onSelect }: { activeId: SectionId | null; onSe
             <button
               type="button"
               onClick={() => onSelect(item.id)}
-              className={`text-sm font-semibold transition hover:text-white ${
-                isActive ? 'text-white' : 'text-white/70'
+              className={`text-sm font-semibold transition hover:text-[var(--text)] ${
+                isActive ? 'text-[var(--text)]' : 'text-[var(--text)]/70'
               }`}
               aria-current={isActive ? 'page' : undefined}
             >
@@ -144,18 +147,35 @@ function DesktopLinks({ activeId, onSelect }: { activeId: SectionId | null; onSe
   )
 }
 
+function ThemeToggle({ theme, onToggle, className }: { theme: 'light' | 'dark'; onToggle: () => void; className?: string }) {
+  return (
+    <button
+      type="button"
+      onClick={onToggle}
+      aria-label={theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
+      className={`inline-flex items-center justify-center rounded-xl border border-[var(--text)]/10 bg-[var(--text)]/5 text-[var(--text)] transition hover:bg-[var(--text)]/10 ${className ?? ''}`}
+    >
+      {theme === 'dark' ? <Moon className="h-4 w-4" /> : <Sun className="h-4 w-4" />}
+    </button>
+  )
+}
+
 function MobileMenu({
   activeId,
   mobileOpen,
   onOpen,
   onClose,
   onSelect,
+  theme,
+  onToggleTheme,
 }: {
   activeId: SectionId | null
   mobileOpen: boolean
   onOpen: () => void
   onClose: () => void
   onSelect: (id: SectionId) => void
+  theme: 'light' | 'dark'
+  onToggleTheme: () => void
 }) {
   useEffect(() => {
     if (!mobileOpen) return
@@ -173,7 +193,7 @@ function MobileMenu({
         onClick={onOpen}
         aria-label="Open menu"
         aria-expanded={mobileOpen}
-        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-xl border border-[var(--text)]/10 bg-[var(--text)]/5 text-[var(--text)]"
       >
         <Menu className="h-4 w-4" />
       </button>
@@ -186,7 +206,7 @@ function MobileMenu({
                 type="button"
                 aria-label="Close menu"
                 onClick={onClose}
-                className="fixed inset-0 z-40 bg-[#020308]/70 backdrop-blur-sm"
+                className="fixed inset-0 z-40 bg-[var(--mobile-backdrop)] backdrop-blur-sm"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -194,10 +214,10 @@ function MobileMenu({
               />
 
               <motion.div
-                className="fixed inset-y-0 right-0 z-50 flex w-[84vw] max-w-[340px] flex-col border-l border-white/10"
+                className="fixed inset-y-0 right-0 z-50 flex w-[84vw] max-w-[340px] flex-col border-l border-[var(--text)]/10"
                 style={{
-                  background: 'linear-gradient(180deg, #0b1020 0%, #050816 100%)',
-                  boxShadow: '-24px 0 60px rgba(0,0,0,.55)',
+                  background: 'var(--mobile-menu-bg)',
+                  boxShadow: '-24px 0 60px rgba(0,0,0,.35)',
                   willChange: 'transform',
                 }}
                 role="dialog"
@@ -208,22 +228,25 @@ function MobileMenu({
                 exit={{ x: '100%' }}
                 transition={{ type: 'spring', stiffness: 340, damping: 34, mass: 0.9 }}
               >
-                <div className="flex items-center justify-between border-b border-white/10 px-5 py-5">
+                <div className="flex items-center justify-between border-b border-[var(--text)]/10 px-5 py-5">
                   <div className="flex items-center gap-3">
                     <Logo />
                     <span className="flex flex-col">
-                      <span className="text-sm font-bold leading-tight text-white">Muhammed Youssef</span>
-                      <span className="text-xs leading-tight text-white/55">Frontend Developer</span>
+                      <span className="text-sm font-bold leading-tight text-[var(--text)]">Muhammed Youssef</span>
+                      <span className="text-xs leading-tight text-[var(--text)]/55">Frontend Developer</span>
                     </span>
                   </div>
-                  <button
-                    type="button"
-                    onClick={onClose}
-                    aria-label="Close menu"
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-white/80 transition hover:bg-white/10 hover:text-white"
-                  >
-                    <X className="h-4 w-4" />
-                  </button>
+                  <div className="flex items-center gap-2">
+                    <ThemeToggle theme={theme} onToggle={onToggleTheme} className="h-10 w-10" />
+                    <button
+                      type="button"
+                      onClick={onClose}
+                      aria-label="Close menu"
+                      className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--text)]/10 bg-[var(--text)]/5 text-[var(--text)]/80 transition hover:bg-[var(--text)]/10 hover:text-[var(--text)]"
+                    >
+                      <X className="h-4 w-4" />
+                    </button>
+                  </div>
                 </div>
 
                 <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-4">
@@ -237,8 +260,8 @@ function MobileMenu({
                         onClick={() => onSelect(item.id)}
                         className={`flex w-full items-center gap-3.5 rounded-xl px-4 py-3.5 text-left text-[15px] font-semibold transition ${
                           isActive
-                            ? 'bg-white/[0.08] text-white ring-1 ring-white/10'
-                            : 'text-white/70 hover:bg-white/5 hover:text-white'
+                            ? 'bg-[var(--text)]/[0.08] text-[var(--text)] ring-1 ring-[var(--text)]/10'
+                            : 'text-[var(--text)]/70 hover:bg-[var(--text)]/5 hover:text-[var(--text)]'
                         }`}
                         aria-current={isActive ? 'page' : undefined}
                         initial={{ opacity: 0, x: 16 }}
@@ -248,8 +271,8 @@ function MobileMenu({
                         <span
                           className={`inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
                             isActive
-                              ? 'bg-gradient-to-br from-[#8B5CF6] to-[#06B6D4] text-white'
-                              : 'bg-white/5 text-white/60'
+                              ? 'bg-gradient-to-br from-[#64748B] to-[#64748B] text-white'
+                              : 'bg-[var(--text)]/5 text-[var(--text)]/60'
                           }`}
                         >
                           <Icon className="h-4 w-4" />
@@ -260,12 +283,12 @@ function MobileMenu({
                   })}
                 </nav>
 
-                <div className="border-t border-white/10 p-4">
+                <div className="border-t border-[var(--text)]/10 p-4">
                   <a
-                    href="/Cv.pdf"
+                    href="/CV (2).pdf"
                     download
-                    className="flex items-center justify-center gap-2 rounded-xl px-4 py-3.5 text-sm font-semibold text-white shadow-[0_15px_40px_-10px_rgba(139,92,246,.55)]"
-                    style={{ background: 'linear-gradient(135deg, #8B5CF6 0%, #06B6D4 100%)' }}
+                    className="flex items-center justify-center gap-2 rounded-xl px-4 py-3.5 text-sm font-semibold text-white shadow-[0_15px_40px_-10px_rgba(100,116,139,.55)]"
+                    style={{ background: '#64748B' }}
                   >
                     <Download className="h-4 w-4" />
                     Download CV
@@ -286,6 +309,7 @@ export default function Navbar() {
   const activeId = useActiveSection(navItems.map((n) => n.id))
   const [mobileOpen, setMobileOpen] = useState(false)
   const scrolled = useScrolled()
+  const { theme, toggleTheme } = useTheme()
 
   useEffect(() => {
     if (!mobileOpen) return
@@ -306,8 +330,8 @@ export default function Navbar() {
       className="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
       style={{
         height: BAR_HEIGHT_PX,
-        background: scrolled ? 'rgba(5,8,22,.85)' : 'transparent',
-        borderBottom: scrolled ? '1px solid rgba(255,255,255,.08)' : '1px solid transparent',
+        background: scrolled ? 'var(--nav-scrolled)' : 'var(--nav-idle)',
+        borderBottom: scrolled ? '1px solid var(--nav-border)' : '1px solid transparent',
         backdropFilter: scrolled ? 'blur(16px)' : 'none',
       }}
     >
@@ -324,20 +348,22 @@ export default function Navbar() {
         >
           <Logo />
           <span className="hidden flex-col sm:flex">
-            <span className="text-[15px] font-bold leading-tight text-white">Muhammed Youssef</span>
-            <span className="text-xs leading-tight text-white/55">Frontend Developer</span>
+            <span className="text-[15px] font-bold leading-tight text-[var(--text)]">Muhammed Youssef</span>
+            <span className="text-xs leading-tight text-[var(--text)]/55">Frontend Developer</span>
           </span>
         </a>
 
         {/* Center-right: links */}
         <DesktopLinks activeId={activeId} onSelect={onSelect} />
 
-        {/* Right: CV download (desktop) + mobile menu */}
+        {/* Right: theme toggle + CV download (desktop) + mobile menu */}
         <div className="flex items-center gap-3">
+          <ThemeToggle theme={theme} onToggle={toggleTheme} className="hidden h-11 w-11 md:inline-flex" />
+
           <a
-            href="/Cv.pdf"
+            href="/CV (2).pdf"
             download
-            className="hidden items-center gap-2 rounded-xl border border-white/15 bg-white/5 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10 md:inline-flex"
+            className="hidden items-center gap-2 rounded-xl bg-[#64748B] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#586479] md:inline-flex"
           >
             <Download className="h-4 w-4" />
             Download CV
@@ -349,6 +375,8 @@ export default function Navbar() {
             onOpen={() => setMobileOpen(true)}
             onClose={() => setMobileOpen(false)}
             onSelect={onSelect}
+            theme={theme}
+            onToggleTheme={toggleTheme}
           />
         </div>
       </div>

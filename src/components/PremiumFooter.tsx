@@ -39,16 +39,16 @@ const UnderlineLink = ({
       target={isExternal ? '_blank' : undefined}
       rel={isExternal ? 'noreferrer' : undefined}
 
-      className="group relative inline-flex items-center gap-2 rounded-xl px-2 py-1 text-sm font-semibold text-white/80 transition"
+      className="group relative inline-flex items-center gap-2 rounded-xl px-2 py-1 text-sm font-semibold text-[var(--text)]/80 transition"
       whileHover={{ y: -2 }}
       transition={{ duration: 0.22, ease: 'easeOut' }}
     >
-      <span className="relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/[0.03] transition group-hover:border-white/20">
+      <span className="relative z-10 inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--text)]/10 bg-[var(--text)]/[0.03] transition group-hover:border-[var(--text)]/20">
         <motion.span
-          initial={{ rotate: 0, scale: 1, color: '#94A3B8' }}
+          initial={{ rotate: 0, scale: 1 }}
           whileHover={{ rotate: 0, scale: 1.08 }}
           transition={{ duration: 0.2, ease: 'easeOut' }}
-          className="text-white/80"
+          className="text-[var(--text)]/80"
         >
           {icon}
         </motion.span>
@@ -59,7 +59,7 @@ const UnderlineLink = ({
       {/* underline animation */}
       <span
         aria-hidden
-        className="absolute left-0 right-0 -bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-[#8B5CF6] to-[#06B6D4] opacity-0 transition-all duration-300 group-hover:scale-x-100 group-hover:opacity-100"
+        className="absolute left-0 right-0 -bottom-1 h-px origin-left scale-x-0 bg-gradient-to-r from-[#64748B] to-[#64748B] opacity-0 transition-all duration-300 group-hover:scale-x-100 group-hover:opacity-100"
       />
     </motion.a>
   )
@@ -67,7 +67,7 @@ const UnderlineLink = ({
 
 export default function PremiumFooter() {
   return (
-    <footer id="footer" className="bg-[#050816]">
+    <footer id="footer" className="bg-[var(--bg)]">
       <div className="mx-auto w-full max-w-6xl px-6 pt-16 pb-10">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-end">
           {/* Left */}
@@ -76,13 +76,13 @@ export default function PremiumFooter() {
 
             <div className="flex flex-col gap-3">
               <SoftReveal delay={0.05}>
-                <div className="text-sm font-semibold tracking-[0.22em] text-white/60">
+                <div className="text-sm font-semibold tracking-[0.22em] text-[var(--text)]/60">
                   Frontend Developer & UI/UX Designer
                 </div>
               </SoftReveal>
 
               <SoftReveal delay={0.1}>
-                <p className="max-w-[520px] text-base leading-relaxed text-white/70">
+                <p className="max-w-[520px] text-base leading-relaxed text-[var(--text)]/70">
                   Building modern digital experiences with clean code and
                   thoughtful design.
                 </p>
@@ -93,8 +93,8 @@ export default function PremiumFooter() {
           {/* Right */}
           <div className="flex flex-col items-start gap-5 lg:items-end">
             <SoftReveal delay={0.12}>
-              <div className="text-xs font-semibold tracking-[0.26em] text-white/60">
-                SOCIAL
+              <div className="text-xs font-semibold tracking-[0.26em] text-[var(--text)]/60">
+                
               </div>
             </SoftReveal>
 
@@ -128,27 +128,19 @@ export default function PremiumFooter() {
         </div>
 
         {/* Divider */}
-        <div className="mt-14 border-t border-white/10 pt-6">
+        <div className="mt-14 border-t border-[var(--text)]/10 pt-6">
           <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, ease: 'easeOut' }}
-              className="text-sm font-semibold text-white/70"
+              className="text-sm font-semibold text-[var(--text)]/70"
             >
               © 2026 Muhammed Youssef. All Rights Reserved.
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 8 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, ease: 'easeOut', delay: 0.04 }}
-              className="text-sm font-semibold text-white/60"
-            >
-              Crafted with React, TypeScript & Tailwind CSS.
-            </motion.div>
+          
           </div>
         </div>
       </div>
