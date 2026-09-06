@@ -285,7 +285,7 @@ function MobileMenu({
 
                 <div className="border-t border-[var(--text)]/10 p-4">
                   <a
-                    href="/CV (2).pdf"
+                    href="/CV.pdf"
                     download
                     className="flex items-center justify-center gap-2 rounded-xl px-4 py-3.5 text-sm font-semibold text-white shadow-[0_15px_40px_-10px_rgba(100,116,139,.55)]"
                     style={{ background: '#64748B' }}
@@ -361,7 +361,7 @@ export default function Navbar() {
           <ThemeToggle theme={theme} onToggle={toggleTheme} className="hidden h-11 w-11 md:inline-flex" />
 
           <a
-            href="/CV (2).pdf"
+            href="/CV.pdf"
             download
             className="hidden items-center gap-2 rounded-xl bg-[#64748B] px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-[#586479] md:inline-flex"
           >

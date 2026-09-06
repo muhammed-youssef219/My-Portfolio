@@ -120,7 +120,7 @@ export default function About() {
               </p>
 
               <motion.a
-                href="/CV (2).pdf"
+                href="/CV.pdf"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-2 inline-flex w-fit items-center justify-center gap-2 rounded-full bg-[#64748B] px-6 py-3 text-sm font-semibold text-white transition hover:bg-[#586479]"

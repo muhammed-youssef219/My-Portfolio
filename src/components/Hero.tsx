@@ -186,7 +186,7 @@ export default function Hero() {
               transition={{ duration: 0.65, delay: 0.08 }}
             >
               <motion.div
-                className="relative aspect-[4/5] w-full max-w-[420px] overflow-hidden rounded-[24px] shadow-[0_30px_80px_-20px_rgba(0,0,0,.65)]"
+                className="relative aspect-square w-full max-w-[360px] overflow-hidden rounded-full shadow-[0_30px_80px_-20px_rgba(0,0,0,.65)]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: 0.2, ease: 'easeOut' }}

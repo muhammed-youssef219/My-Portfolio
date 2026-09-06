@@ -17,7 +17,7 @@ type Project = {
   tech: string[]
   techGroups?: TechGroup[]
   imageSrc: string
-  liveUrl: string
+  liveUrl?: string
   githubUrl: string
 }
 
@@ -209,13 +209,15 @@ function ProjectCard({
         )}
 
         <div className="mt-auto pt-4 flex flex-wrap items-center gap-2">
-          <LuxuryButton
-            variant="primary"
-            href={project.liveUrl}
-            icon={<ExternalLink className="h-4 w-4" />}
-          >
-            View
-          </LuxuryButton>
+          {project.liveUrl ? (
+            <LuxuryButton
+              variant="primary"
+              href={project.liveUrl}
+              icon={<ExternalLink className="h-4 w-4" />}
+            >
+              View
+            </LuxuryButton>
+          ) : null}
           <LuxuryButton variant="secondary" href={project.githubUrl}>
             GitHub
           </LuxuryButton>
@@ -318,6 +320,37 @@ export default function FeaturedProjects() {
 
 
 
+    {
+      number: '',
+      title: 'El-Noor Clinic Management System',
+      description:
+        'A full-stack healthcare management platform for managing clinic operations, including appointments, doctors, patients, medical records, billing, notifications, and role-based dashboards for Admins, Receptionists, Doctors, and Patients. Built with a scalable decoupled architecture, secure authentication, RESTful APIs, audit logs, appointment availability validation, and automated Email/SMS notifications.',
+      category: 'FullStack Development',
+      tech: [],
+      techGroups: [
+        {
+          label: 'Frontend',
+          items: ['Next.js', 'React', 'Recharts', 'Vitest'],
+        },
+        {
+          label: 'Backend',
+          items: [
+            'Laravel',
+            'PHP 8.3',
+            'Laravel Sanctum',
+            'REST API',
+            'Events & Queues',
+            'PHPUnit',
+            'Twilio',
+          ],
+        },
+      ],
+      imageSrc: '/noor clinic.png',
+      githubUrl: 'https://github.com/muhammed-youssef219/El-Noor-Clinic-System.git',
+    },
+
+
+
 
 {
       number: '',
@@ -337,9 +370,7 @@ export default function FeaturedProjects() {
             'PostgreSQL (Neon)',
             'Prisma ORM',
             'JWT (httpOnly cookies)',
-            'bcrypt',
-            'Vercel Blob',
-            'Vercel Deployment',
+            
           ],
         },
       ],
@@ -367,6 +398,32 @@ export default function FeaturedProjects() {
 
 
 
+{
+      number: '',
+      title: 'Lawyer Profile — Legal Services & Law Firm Platform',
+      description:
+        'A premium legal services and law firm platform built with React, TypeScript, and Vite. The platform provides structured legal services, practice areas, consultation workflows, legal articles, FAQs, and direct client communication through a responsive, accessible, and component-driven architecture.',
+      category: 'Frontend Development',
+      tech: [
+        'React 19',
+        'TypeScript',
+        'Vite',
+        'Tailwind CSS',
+        'TanStack Router',
+        'TanStack Query',
+        'React Hook Form',
+        'Zod',
+        'Radix UI',
+        'Lucide React',
+        'Recharts',
+        'Vercel',
+      ],
+      imageSrc: '/lawyer.png',
+      liveUrl: 'https://lawyer-profile-t2yo.vercel.app/',
+      githubUrl: 'https://github.com/muhammed-youssef219/Lawyer-Profile.git',
+    },
+
+
 
      {
       number: '',
@@ -379,6 +436,7 @@ export default function FeaturedProjects() {
       liveUrl: 'https://fresh-cart-ecommerce-uhhb.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/FreshCart-ecommerce.git',
     },
+
 
 
 
@@ -472,7 +530,6 @@ export default function FeaturedProjects() {
             </FilterTab>
           ))}
         </div>
-
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
           {projects
             .filter((project) => activeFilter === 'all' || project.category === activeFilter)
