@@ -3,9 +3,12 @@ import type { ReactNode } from 'react'
 import { ArrowDownToLine } from 'lucide-react'
 import {
   SiFigma,
+  SiExpress,
   SiFramer,
   SiNextdotjs,
+  SiNodedotjs,
   SiReact,
+  SiSwagger,
   SiTailwindcss,
   SiTypescript,
 } from 'react-icons/si'
@@ -45,6 +48,21 @@ const TechCard = ({ name }: { name: string }) => {
       <SiTypescript
         size={20}
         className="text-[#3178C6] transition-colors duration-250 group-hover:text-[#66B6FF]"
+      />
+    ) : name === 'Node.js' ? (
+      <SiNodedotjs
+        size={20}
+        className="text-[#68A063] transition-colors duration-250 group-hover:text-[#8CCB72]"
+      />
+    ) : name === 'Express.js' ? (
+      <SiExpress
+        size={20}
+        className="text-[var(--text)] transition-colors duration-250 group-hover:text-[var(--text)]/80"
+      />
+    ) : name === 'REST APIs' ? (
+      <SiSwagger
+        size={20}
+        className="text-[#85EA2D] transition-colors duration-250 group-hover:text-[#A7F55A]"
       />
     ) : name === 'Tailwind CSS' ? (
       <SiTailwindcss
@@ -115,7 +133,7 @@ export default function About() {
               </h2>
 
               <p className="max-w-[520px] text-base leading-relaxed text-[var(--text)]/75">
-               I specialize in developing modern frontend applications and designing intuitive user interfaces that balance aesthetics with functionality. From responsive layouts to smooth interactions, I focus on creating digital experiences that are fast, accessible, and crafted with attention to every detail.
+               I am a Full-Stack Developer specializing in modern React and Node.js applications. I build responsive user interfaces, scalable backend services, and REST APIs that are fast, accessible, and crafted with attention to every detail.
 
               </p>
 
@@ -147,8 +165,8 @@ export default function About() {
                 <div>
                   <div className="grid gap-4 sm:grid-cols-3">
                     <StatCard value="2+" label="Years Experience" delay={0.05} />
-                    <StatCard value="20+" label="Projects" delay={0.12} />
-                    <StatCard value="10+" label="Clients" delay={0.19} />
+                    <StatCard value="50+" label="Projects" delay={0.12} />
+                    <StatCard value="20+" label="Clients" delay={0.19} />
                   </div>
                 </div>
 
@@ -162,6 +180,9 @@ export default function About() {
                   <div className="grid gap-4 sm:grid-cols-2">
                     <TechCard name="React" />
                     <TechCard name="TypeScript" />
+                    <TechCard name="Node.js" />
+                    <TechCard name="Express.js" />
+                    <TechCard name="REST APIs" />
                     <TechCard name="Tailwind CSS" />
                     <TechCard name="Framer Motion" />
                     <TechCard name="Figma" />

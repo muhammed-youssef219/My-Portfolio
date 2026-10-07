@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion'
 import { ArrowUpRight, Mail, Calendar, FolderKanban, Users, Code2, ChevronDown } from 'lucide-react'
-import { SiReact, SiTypescript, SiNextdotjs, SiTailwindcss, SiFramer, SiFigma } from 'react-icons/si'
+import { SiReact, SiTypescript, SiNextdotjs, SiTailwindcss, SiFigma, SiNodedotjs, SiExpress, SiSwagger } from 'react-icons/si'
 
 import type { ReactNode } from 'react'
 
@@ -126,15 +126,14 @@ export default function Hero() {
             >
               <div className="flex flex-col gap-5">
                 <h1 className="flex flex-col gap-1.5 text-[36px] leading-[0.95] font-bold tracking-[-1.3px] text-[var(--text)] sm:text-[42px] md:text-[54px]">
-                  <span>Frontend Developer</span>
+                  <span>FullStack Developer</span>
                   <span className="sm:whitespace-nowrap">
-                    <GradientText>&amp; UI/UX Designer</GradientText>
+                    <GradientText>Node.js · Next.js</GradientText>
                   </span>
                 </h1>
 
                 <p className="max-w-[520px] text-base leading-relaxed text-[var(--text)]/75">
-                  I build modern, responsive and user-friendly web applications with clean code and great user
-                  experience.
+                 I build scalable, high-performance web applications with modern frontend and backend technologies.
                 </p>
 
                 <div className="flex flex-wrap items-center gap-3">
@@ -167,11 +166,9 @@ export default function Hero() {
                       label="Tailwind CSS"
                       delay={0.45}
                     />
-                    <TechBadge
-                      icon={<SiFramer size={17} style={{ color: '#64748B' }} />}
-                      label="Framer Motion"
-                      delay={0.5}
-                    />
+<TechBadge icon={<SiNodedotjs size={17} style={{ color: '#68A063' }} />} label="Node.js" delay={0.5} />
+        <TechBadge icon={<SiExpress size={17} style={{ color: '#000000' }} />} label="Express.js" delay={0.55} />
+        <TechBadge icon={<SiSwagger size={17} style={{ color: '#85EA2D' }} />} label="REST APIs" delay={0.6} />
                     <TechBadge icon={<SiFigma size={17} style={{ color: 'var(--text)' }} />} label="Figma" delay={0.55} />
                   </div>
                 </div>

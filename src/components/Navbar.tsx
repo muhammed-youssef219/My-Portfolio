@@ -349,7 +349,7 @@ export default function Navbar() {
           <Logo />
           <span className="hidden flex-col sm:flex">
             <span className="text-[15px] font-bold leading-tight text-[var(--text)]">Muhammed Youssef</span>
-            <span className="text-xs leading-tight text-[var(--text)]/55">Frontend Developer</span>
+            <span className="text-xs leading-tight text-[var(--text)]/55">FullStack Developer</span>
           </span>
         </a>
 

@@ -133,7 +133,7 @@ export default function FinalCTAContact() {
 
             <SoftScrollReveal delay={0.05}>
               <h2 className="text-[44px] leading-[1.04] font-bold tracking-[-1px] text-[var(--text)] md:text-[56px] [@media(max-width:389px)]:text-[36px]">
-               Let's Build Together
+               Contact
               </h2>
 
             </SoftScrollReveal>
@@ -262,4 +262,3 @@ high-performance web experiences.
     </section>
   )
 }
-

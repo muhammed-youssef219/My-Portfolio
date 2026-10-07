@@ -18,6 +18,7 @@ const CERTIFICATES: Certificate[] = [
     date: 'Aug 2025 — Sep 2025',
     detail: '120 training hours',
     fileSrc: '/Front-end.jpg.jpeg',
+    thumbnailSrc: '/optimized/frontend-certificate.jpg',
   },
   {
     title: 'UI/UX Design',
@@ -25,7 +26,7 @@ const CERTIFICATES: Certificate[] = [
     date: 'Jan 2026 — Feb 2026',
     detail: '120 hours · Score 92%',
     fileSrc: '/UiUx.pdf',
-    thumbnailSrc: '/uiux-certificate.png',
+    thumbnailSrc: '/optimized/uiux-certificate.jpg',
   },
   {
     title: 'Software Testing',
@@ -123,7 +124,7 @@ export default function Certifications() {
 
       <div className="relative mx-auto w-full max-w-6xl px-6">
         <SectionHeading
-          title="Certifications & Training"
+          title="Experience"
           subtitle="Verified courses and training programs that back up the skills used across these projects."
         />
 

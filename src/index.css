@@ -76,3 +76,35 @@ body {
   min-height: 100svh;
   overflow-x: clip;
 }
+
+/* Decorative glows are intentionally lighter than the design defaults to keep scrolling smooth. */
+[class*="blur-[120px]"],
+[class*="blur-[130px]"],
+[class*="blur-[110px]"] {
+  filter: blur(72px) !important;
+}
+
+/* Backdrop filters are particularly expensive on lower-powered mobile GPUs. */
+@media (max-width: 900px) {
+  [class*="blur-[120px]"],
+  [class*="blur-[130px]"],
+  [class*="blur-[110px]"] {
+    filter: blur(44px) !important;
+  }
+
+  [class*="backdrop-blur"] {
+    -webkit-backdrop-filter: none !important;
+    backdrop-filter: none !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -50,6 +50,8 @@ const FILTERS = [
   { label: 'Full Stack', value: 'FullStack Development' },
 ] as const
 
+const PROJECTS_PER_PAGE = 4
+
 const FilterTab = ({
   active,
   onClick,
@@ -153,6 +155,7 @@ function ProjectCard({
             src={project.imageSrc}
             alt={project.title}
             loading="lazy"
+            decoding="async"
             className="aspect-[16/9] w-full object-cover"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
@@ -229,6 +232,7 @@ function ProjectCard({
 
 export default function FeaturedProjects() {
   const [activeFilter, setActiveFilter] = useState<string>('all')
+  const [visibleProjectsCount, setVisibleProjectsCount] = useState(PROJECTS_PER_PAGE)
 
   const projects: Project[] = [
 
@@ -274,7 +278,7 @@ export default function FeaturedProjects() {
           ],
         },
       ],
-      imageSrc: '/talom.png',
+      imageSrc: '/optimized/talom.jpg',
       liveUrl: 'https://teacher-platform-blond.vercel.app/',
       githubUrl: 'https://github.com/muhammed-youssef219/Teacher-Platform.git',
     },
@@ -312,7 +316,7 @@ export default function FeaturedProjects() {
           items: ['Vercel', 'GitHub Actions-ready'],
         },
       ],
-      imageSrc: '/pos system.png',
+      imageSrc: '/optimized/pos system.jpg',
       liveUrl: 'https://alnokhba-pos-system.vercel.app/',
       githubUrl: 'https://github.com/muhammed-youssef219/alnokhba-pos-system.git',
     },
@@ -345,7 +349,7 @@ export default function FeaturedProjects() {
           ],
         },
       ],
-      imageSrc: '/noor clinic.png',
+      imageSrc: '/optimized/noor clinic.jpg',
       githubUrl: 'https://github.com/muhammed-youssef219/El-Noor-Clinic-System.git',
     },
 
@@ -374,7 +378,7 @@ export default function FeaturedProjects() {
           ],
         },
       ],
-      imageSrc: '/local brand.png',
+      imageSrc: '/optimized/local brand.jpg',
       liveUrl: 'https://local-brand-eight.vercel.app/',
       githubUrl: 'https://github.com/muhammed-youssef219/ATHAR--Localbrand.git',
     },
@@ -391,7 +395,7 @@ export default function FeaturedProjects() {
         '    A full-featured furniture storefront built from scratch in React, covering the complete shopping flow: browsing by category or room, real-time search, multi-filter product discovery (category, room, price range, on-sale), a persistent cart and wishlist, and a WhatsApp-based checkout that hands off the full order (items, quantities, prices, photos) directly to a business number. The UI includes a cinematic animated hero (parallax tilt + Ken Burns zoom), a full light/dark theme system, and a fully responsive layout tuned across mobile, tablet, and desktop. ',
       category: 'Frontend Development',
       tech: ['React.js', 'TypeScript', 'Tailwind CSS', ' Zustand', '  lucide-react ', 'React Router DOM' , '  react-hot-toast'],
-      imageSrc: '/homie.png',
+      imageSrc: '/optimized/homie.jpg',
       liveUrl: 'https://homie-furniture.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/homie-furniture.git',
     },
@@ -418,7 +422,7 @@ export default function FeaturedProjects() {
         'Recharts',
         'Vercel',
       ],
-      imageSrc: '/lawyer.png',
+      imageSrc: '/optimized/lawyer.jpg',
       liveUrl: 'https://lawyer-profile-t2yo.vercel.app/',
       githubUrl: 'https://github.com/muhammed-youssef219/Lawyer-Profile.git',
     },
@@ -432,7 +436,7 @@ export default function FeaturedProjects() {
         'A modern and responsive e-commerce frontend application built with React, TypeScript, and Tailwind CSS. FreshCart provides a seamless shopping experience with product browsing, category filtering, search, product details, shopping cart, wishlist, and a responsive checkout flow. The project focuses on clean architecture, reusable components, scalable code, and an optimized user experience across all devices.',
       category: 'Frontend Development',
       tech: ['React', 'TypeScript', 'Tailwind CSS', 'Framer Motion', 'React Router DOM', 'React Hook Form', 'Axios'],
-      imageSrc: '/freshcart.png',
+      imageSrc: '/optimized/freshcart.jpg',
       liveUrl: 'https://fresh-cart-ecommerce-uhhb.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/FreshCart-ecommerce.git',
     },
@@ -452,7 +456,7 @@ export default function FeaturedProjects() {
         'Developed a premium real estate web application with a modern, responsive interface using React, TypeScript, Vite, and Tailwind CSS. Implemented dynamic property listings, property details, blog pages, reusable components, client-side routing, responsive design, smooth animations, and optimized performance to create a professional real estate browsing experience.',
       category: 'Frontend Development',
       tech: ['React.js', 'TypeScript', 'JavaScript (ES6+)', ' React Router DOM', 'Framer Motion'],
-      imageSrc: '/homeverse.png',
+      imageSrc: '/optimized/homeverse.jpg',
       liveUrl: 'https://homeverse-master-smoky.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/Homeverse-Master.git',
     },
@@ -466,7 +470,7 @@ export default function FeaturedProjects() {
         'A high-performance business website engineered with modern frontend technologies, featuring responsive layouts, reusable components, smooth interactions, and clean, maintainable architecture.',
       category: 'Frontend Development',
       tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'React Router DOM', 'react Hook Form'],
-      imageSrc: '/elsabah.png',
+      imageSrc: '/optimized/elsabah.jpg',
       liveUrl: 'https://el-sabah.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/El---sabah.git',
     },
@@ -481,7 +485,7 @@ export default function FeaturedProjects() {
         'A modern and responsive website for VortexTechnology, showcasing the companys software development, mobile applications, custom systems, digital marketing, cybersecurity, server management, and game hosting services through a premium interactive interface. ',
       category: 'Frontend Development',
       tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'React Router DOM', 'React Hook Form', 'Framer Motion' ],
-      imageSrc: '/vortexa.png',
+      imageSrc: '/optimized/vortexa.jpg',
       liveUrl: 'https://vortexatechnologies-website.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/Vortexatechnologies-Website.git',
     },
@@ -495,7 +499,7 @@ export default function FeaturedProjects() {
         'Developed a fully responsive educational website for Kingdom Schools using React, TypeScript, and Tailwind CSS. The application features a modern user interface with smooth navigation, animated sections, reusable components, and optimized performance. The project focuses on delivering an intuitive user experience across all devices while maintaining clean architecture, scalability, and maintainable code. It demonstrates best practices in modern frontend development, including responsive layouts, component reusability, and professional UI design.',
       category: 'Frontend Development',
       tech: ['React.js', 'TypeScript', 'Tailwind CSS', 'React Router DOM', 'React Hook Form', 'Framer Motion' ],
-      imageSrc: '/kingdom.png',
+      imageSrc: '/optimized/kingdom.jpg',
       liveUrl: 'https://kingdom-schools.vercel.app/',
       githubUrl: 'https://github.com/my7422362-wq/kingdom-schools.git',
     },
@@ -506,6 +510,17 @@ export default function FeaturedProjects() {
 
   ]
 
+  const filteredProjects = projects.filter(
+    (project) => activeFilter === 'all' || project.category === activeFilter,
+  )
+  const visibleProjects = filteredProjects.slice(0, visibleProjectsCount)
+  const hasMoreProjects = visibleProjects.length < filteredProjects.length
+
+  const handleFilterChange = (filter: string) => {
+    setActiveFilter(filter)
+    setVisibleProjectsCount(PROJECTS_PER_PAGE)
+  }
+
   return (
     <section id="projects" className="relative overflow-hidden bg-[var(--bg)] py-20 md:py-28">
       <div className="pointer-events-none absolute inset-0">
@@ -515,7 +530,7 @@ export default function FeaturedProjects() {
 
       <div className="relative mx-auto w-full max-w-6xl px-6">
         <SectionHeading
-          title="Featured Projects"
+          title="Projects"
           subtitle="A collection of projects focused on modern design, clean code, and exceptional user experiences."
         />
 
@@ -524,19 +539,28 @@ export default function FeaturedProjects() {
             <FilterTab
               key={filter.value}
               active={activeFilter === filter.value}
-              onClick={() => setActiveFilter(filter.value)}
+              onClick={() => handleFilterChange(filter.value)}
             >
               {filter.label}
             </FilterTab>
           ))}
         </div>
         <div className="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2">
-          {projects
-            .filter((project) => activeFilter === 'all' || project.category === activeFilter)
-            .map((project, index) => (
+          {visibleProjects.map((project, index) => (
               <ProjectCard key={project.title} project={project} index={index} />
-            ))}
+          ))}
         </div>
+        {hasMoreProjects ? (
+          <div className="mt-8 flex justify-center">
+            <button
+              type="button"
+              onClick={() => setVisibleProjectsCount((count) => count + PROJECTS_PER_PAGE)}
+              className="rounded-full border border-[var(--card-border)] bg-[var(--surface)] px-5 py-2.5 text-sm font-semibold text-[var(--text)]/80 transition hover:border-[var(--text)]/20 hover:text-[var(--text)]"
+            >
+              Show more projects
+            </button>
+          </div>
+        ) : null}
       </div>
     </section>
   )

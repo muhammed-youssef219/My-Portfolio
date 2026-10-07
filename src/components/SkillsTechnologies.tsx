@@ -1,24 +1,23 @@
 import { motion } from 'framer-motion'
 import type { ReactNode } from 'react'
 import {
-  LayoutGrid,
-  PenTool,
-  Component,
-  Search,
-} from 'lucide-react'
-import {
-  SiReact,
-  SiTypescript,
-  SiNextdotjs,
-  SiTailwindcss,
-  SiJavascript,
-  SiFigma,
+  SiExpress,
   SiGit,
   SiGithub,
-  SiXcode,
-  SiVite,
   SiFramer,
+  SiJavascript,
+  SiJsonwebtokens,
+  SiMongodb,
+  SiMongoose,
+  SiNextdotjs,
+  SiNodedotjs,
+  SiReact,
+  SiSwagger,
+  SiTailwindcss,
+  SiTypescript,
+  SiVite,
 } from 'react-icons/si'
+import { VscVscode } from 'react-icons/vsc'
 
 
 
@@ -154,7 +153,7 @@ export default function SkillsTechnologies() {
       <div className="relative mx-auto w-full max-w-6xl px-6">
         <div className="flex flex-col gap-4">
           <SoftScrollReveal>
-            <SectionLabel>Skills &amp; Technologies</SectionLabel>
+            <SectionLabel> Technologies</SectionLabel>
           </SoftScrollReveal>
         </div>
 
@@ -203,36 +202,38 @@ export default function SkillsTechnologies() {
 
           <SkillCard
             index=""
-            title="UI/UX Design"
+            title="Backend Development"
             items={[
               {
-                icon: <span className="inline-flex items-center justify-center" aria-hidden>
-                  <SiFigma size={22} style={{ color: 'var(--primary)' }} />
-                </span>,
-                label: 'Figma',
+                icon: <SiNodedotjs size={22} style={{ color: '#68A063' }} />,
+                label: 'Node.js',
                 indicator: 'line',
               },
               {
-                icon: <LayoutGrid size={22} color="#64748B" />,
-                label: 'Design Systems',
+                icon: <SiExpress size={22} style={{ color: 'var(--text)' }} />,
+                label: 'Express.js',
                 indicator: 'dot',
               },
               {
-                icon: <PenTool size={22} color="#64748B" />,
-                label: 'Wireframing',
+                icon: <SiMongodb size={22} style={{ color: '#47A248' }} />,
+                label: 'MongoDB',
                 indicator: 'dot',
               },
               {
-                icon: <Component size={22} color="#64748B" />,
-                label: 'Prototyping',
+                icon: <SiMongoose size={22} style={{ color: '#880000' }} />,
+                label: 'Mongoose',
                 indicator: 'line',
               },
               {
-                icon: <Search size={22} color="#64748B" />,
-                label: 'User Research',
+                icon: <SiJsonwebtokens size={22} style={{ color: '#D63AFF' }} />,
+                label: 'JWT Authentication',
                 indicator: 'dot',
               },
-
+              {
+                icon: <SiSwagger size={22} style={{ color: '#85EA2D' }} />,
+                label: 'REST APIs',
+                indicator: 'dot',
+              },
             ]}
           />
 
@@ -251,7 +252,7 @@ export default function SkillsTechnologies() {
                 indicator: 'dot',
               },
               {
-                icon: <SiXcode size={22} style={{ color: '#007ACC' }} />,
+                icon: <VscVscode size={22} color="#007ACC" />,
                 label: 'VS Code',
                 indicator: 'line',
               },
@@ -275,4 +276,3 @@ export default function SkillsTechnologies() {
     </section>
   )
 }
-
